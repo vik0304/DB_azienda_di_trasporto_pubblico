@@ -1,5 +1,6 @@
 package team6.entities;
 
+import java.util.List;
 import java.util.UUID;
 import jakarta.persistence.*;
 
@@ -20,6 +21,9 @@ public class Veicolo {
     @Column(name = "in_manutenzione")
     public boolean inManutenzione;
 
+    @OneToMany(mappedBy = "veicolo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Manutenzione> manutenzioni;
+
     public Veicolo() {}
 
     public Veicolo(UUID id, String tipoMezzo, int capienza, boolean inManutenzione) {
@@ -35,5 +39,13 @@ public class Veicolo {
 
     public UUID getId() {
         return id;
+    }
+
+    public List<Manutenzione> getManutenzioni() {
+        return manutenzioni;
+    }
+
+    public void setManutenzioni(List<Manutenzione> manutenzioni) {
+        this.manutenzioni = manutenzioni;
     }
 }
