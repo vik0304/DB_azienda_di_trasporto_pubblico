@@ -1,8 +1,6 @@
 package team6.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -18,10 +16,20 @@ public class Manutenzione {
     @Column(name = "data_di_fine")
     private LocalDate dataDiFine;
 
+    @ManyToOne
+    @JoinColumn(name = "id_mezzo")
+    private Veicolo veicolo;
+
     // LISTA COSTRUTTORI
     public Manutenzione(LocalDate dataDiInizio, LocalDate dataDiFine){
         this.dataDiInizio = dataDiInizio;
         this.dataDiFine = dataDiFine;
+    }
+
+    public Manutenzione(LocalDate dataDiInizio, LocalDate dataDiFine, Veicolo veicolo){
+        this.dataDiInizio = dataDiInizio;
+        this.dataDiFine = dataDiFine;
+        this.veicolo = veicolo;
     }
 
     // COSTRUTTORE VUOTO PER JPA
@@ -49,5 +57,13 @@ public class Manutenzione {
 
     public void setDataDiFine(LocalDate dataDiFine) {
         this.dataDiFine = dataDiFine;
+    }
+
+    public Veicolo getVeicolo() {
+        return veicolo;
+    }
+
+    public void setVeicolo(Veicolo veicolo) {
+        this.veicolo = veicolo;
     }
 }
