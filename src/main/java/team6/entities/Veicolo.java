@@ -1,11 +1,23 @@
 package team6.entities;
 
 import java.util.UUID;
+import jakarta.persistence.*;
 
+@Entity
+@Table(name = "veicolo")
 public class Veicolo {
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
     public UUID id;
+
+    @Column(name = "tipo_mezzo")
     public String tipoMezzo;
+
+    @Column(name = "capienza")
     public int capienza;
+
+    @Column(name = "in_manutenzione")
     public boolean inManutenzione;
 
     public Veicolo() {}
