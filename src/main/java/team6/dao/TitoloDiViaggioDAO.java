@@ -3,38 +3,38 @@ package team6.dao;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import team6.entities.TitoloDiViaggio;
-import team6.entities.Venditore;
 import team6.exeptions.NotFoundException;
 
 import java.util.UUID;
 
-public class VenditoreDAO {
+
+public class TitoloDiViaggioDAO {
     private final EntityManager entityManager;
 
-    public VenditoreDAO (EntityManager entityManager){
+    public TitoloDiViaggioDAO (EntityManager entityManager){
         this.entityManager=entityManager;
     }
 
-    public void save (Venditore venditore){
+    public void save (TitoloDiViaggio titoloDiViaggio){
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
-        entityManager.persist(venditore);
+        entityManager.persist(titoloDiViaggio);
         transaction.commit();
-        System.out.println("Il venditore " + venditore.getId() + " è stato aggiunto.");
+        System.out.println("Il titolo " + titoloDiViaggio.getId() + " è stato aggiunto.");
     }
 
-    public Venditore findById(UUID id){
-        Venditore found = entityManager.find(Venditore.class, id);
+    public TitoloDiViaggio findById(UUID id){
+        TitoloDiViaggio found = entityManager.find(TitoloDiViaggio.class, id);
         if(found==null) throw new NotFoundException(id);
         return found;
     }
 
     public void findAndDelete (UUID id){
-        Venditore found = this.findById(id);
+        TitoloDiViaggio found = this.findById(id);
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
         entityManager.remove(found);
         transaction.commit();
-        System.out.println("Il venditore " + found.getId() + " è stato rimosso.");
+        System.out.println("Il titolo " + found.getId() + " è stato rimosso.");
     }
 }

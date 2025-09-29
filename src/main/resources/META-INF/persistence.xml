@@ -3,11 +3,18 @@
              xmlns="http://xmlns.jcp.org/xml/ns/persistence"
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
     <persistence-unit name="dbtrasporti">
-        <class>team6.entities.Venditore</class>
-        <class>team6.entities.DistributoreAutomatico</class>
-        <class>team6.entities.RivenditoreAutorizzato</class>
+        <class>team6.entities.Abbonamento</class>
         <class>team6.entities.Biglietto</class>
+        <class>team6.entities.DistributoreAutomatico</class>
+        <class>team6.entities.Manutenzione</class>
+        <class>team6.entities.Percorrenza</class>
+        <class>team6.entities.RivenditoreAutorizzato</class>
+        <class>team6.entities.Tessera</class>
         <class>team6.entities.TitoloDiViaggio</class>
+        <class>team6.entities.Tratta</class>
+        <class>team6.entities.Utente</class>
+        <class>team6.entities.Veicolo</class>
+        <class>team6.entities.Venditore</class>
         <properties>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/dbtrasporti"/>
             <property name="jakarta.persistence.jdbc.user" value="postgres"/>

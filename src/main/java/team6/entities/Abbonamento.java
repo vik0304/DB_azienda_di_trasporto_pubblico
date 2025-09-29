@@ -7,59 +7,51 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-public class Abbonamento {
+public class Abbonamento extends TitoloDiViaggio{
     @Id
-    private UUID numeroTessera;
-
-    @Column(name = "data_accquiesto")
-    private LocalDate dataAcquisto;
-
+    @GeneratedValue
+    @Column(name = "id_abbonamento")
+    private UUID idAbbonamento;
     @Column(name = "data_emissione")
     private LocalDate dataEmissione;
-
     @ManyToOne
     @JoinColumn(name = "id_tessera")
     private Tessera idTessera;
 
-    // LISTA COSTRUTTORI
-    public Abbonamento(LocalDate dataAcquisto, LocalDate dataEmissione, Tessera idTessera){
-        this.dataAcquisto = dataAcquisto;
-        this.dataEmissione = dataEmissione;
-        this.idTessera = idTessera;
-    }
-
-    // COSTRUTTORE VUOTO PER JPA
     public Abbonamento(){
     }
 
-    // LISTA METODI
-
-    // GETTER/SETTER
-    public UUID getNumeroTessera() {
-        return numeroTessera;
-    }
-
-    public LocalDate getDataAcquisto() {
-        return dataAcquisto;
-    }
-
-    public void setDataAcquisto(LocalDate dataAcquisto) {
-        this.dataAcquisto = dataAcquisto;
-    }
-
-    public LocalDate getDataEmissione() {
-        return dataEmissione;
-    }
-
-    public void setDataEmissione(LocalDate dataEmissione) {
+    public Abbonamento(LocalDate dataEmissione, Tessera idTessera, LocalDate dataAcquisto, Venditore venditore){
+        super(dataAcquisto, venditore);
         this.dataEmissione = dataEmissione;
-    }
-
-    public Tessera getIdTessera() {
-        return idTessera;
-    }
-
-    public void setIdTessera(Tessera idTessera) {
         this.idTessera = idTessera;
     }
+
+//    public UUID getNumeroTessera() {
+//        return idAbbonamento;
+//    }
+//
+//    public LocalDate getDataAcquisto() {
+//        return dataAcquisto;
+//    }
+//
+//    public void setDataAcquisto(LocalDate dataAcquisto) {
+//        this.dataAcquisto = dataAcquisto;
+//    }
+//
+//    public LocalDate getDataEmissione() {
+//        return dataEmissione;
+//    }
+//
+//    public void setDataEmissione(LocalDate dataEmissione) {
+//        this.dataEmissione = dataEmissione;
+//    }
+//
+//    public Tessera getIdTessera() {
+//        return idTessera;
+//    }
+//
+//    public void setIdTessera(Tessera idTessera) {
+//        this.idTessera = idTessera;
+//    }
 }

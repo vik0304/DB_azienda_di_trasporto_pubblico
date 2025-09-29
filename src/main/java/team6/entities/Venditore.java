@@ -22,4 +22,8 @@ public abstract class Venditore {
     public Venditore(String position){
         this.position=position;
     }
+
+    public UUID getId() {
+        return id;
+    }
 }
