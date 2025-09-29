@@ -1,11 +1,21 @@
 package team6.entities;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
 import java.time.LocalDate;
 import java.util.UUID;
 
+@Entity
 public class Manutenzione {
+    @Id
     private UUID id;
+
+    @Column(name = "data_di_inizio")
     private LocalDate dataDiInizio;
+
+    @Column(name = "data_di_fine")
     private LocalDate dataDiFine;
 
     // LISTA COSTRUTTORI
@@ -14,7 +24,7 @@ public class Manutenzione {
         this.dataDiFine = dataDiFine;
     }
 
-    // COSTRUTTORE VUOTO
+    // COSTRUTTORE VUOTO PER JPA
     public Manutenzione(){
     }
 }
