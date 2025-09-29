@@ -20,7 +20,12 @@ public abstract class TitoloDiViaggio {
 
     public TitoloDiViaggio(){};
 
-    public TitoloDiViaggio(LocalDate dataAcquisto){
+    public TitoloDiViaggio(LocalDate dataAcquisto, Venditore venditore){
         this.dataAcquisto=dataAcquisto;
+        this.venditore=venditore;
+    }
+
+    public UUID getId() {
+        return id;
     }
 }

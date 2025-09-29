@@ -10,8 +10,8 @@ public class Biglietto extends TitoloDiViaggio {
 
     public Biglietto(){};
 
-    public Biglietto(LocalDate dataAcquisto, boolean validato){
-        super(dataAcquisto);
+    public Biglietto(LocalDate dataAcquisto, Venditore venditore, boolean validato){
+        super(dataAcquisto, venditore);
         this.validato=validato;
     }
 }
