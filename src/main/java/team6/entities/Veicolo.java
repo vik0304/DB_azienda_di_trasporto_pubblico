@@ -6,6 +6,8 @@ public class Veicolo {
     public int capienza;
     public boolean inManutenzione;
 
+    public Veicolo() {}
+
     public Veicolo(String id, String tipoMezzo, int capienza, boolean inManutenzione) {
         this.id = id;
         this.tipoMezzo = tipoMezzo;

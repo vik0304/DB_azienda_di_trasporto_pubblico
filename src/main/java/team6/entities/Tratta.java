@@ -8,6 +8,8 @@ public class Tratta {
     public String capolinea;
     public BigInteger durataPrevista;
 
+    public Tratta() {}
+
     public Tratta(String id, String partenza, String capolinea, BigInteger durataPrevista) {
         this.id = id;
         this.partenza = partenza;

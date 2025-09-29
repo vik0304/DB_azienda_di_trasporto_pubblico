@@ -10,6 +10,8 @@ public class Percorrenza {
     public LocalDate dataPartenza;
     public BigInteger durataCorsa;
 
+    public Percorrenza() {}
+
     public Percorrenza(String id, String idMezzo, String idTratta, LocalDate dataPartenza, BigInteger durataCorsa) {
         this.id = id;
         this.idMezzo = idMezzo;
