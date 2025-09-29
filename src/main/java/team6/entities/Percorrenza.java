@@ -2,9 +2,10 @@ package team6.entities;
 
 import java.time.LocalDate;
 import java.math.BigInteger;
+import java.util.UUID;
 
 public class Percorrenza {
-    public String id;
+    public UUID id;
     public String idMezzo;
     public String idTratta;
     public LocalDate dataPartenza;
@@ -12,7 +13,7 @@ public class Percorrenza {
 
     public Percorrenza() {}
 
-    public Percorrenza(String id, String idMezzo, String idTratta, LocalDate dataPartenza, BigInteger durataCorsa) {
+    public Percorrenza(UUID id, String idMezzo, String idTratta, LocalDate dataPartenza, BigInteger durataCorsa) {
         this.id = id;
         this.idMezzo = idMezzo;
         this.idTratta = idTratta;
@@ -22,5 +23,9 @@ public class Percorrenza {
 
     public String toString() {
         return "Percorrenza: " + id + " " + idMezzo + " " + idTratta + " " + dataPartenza + " " + durataCorsa;
+    }
+
+    public UUID getId() {
+        return id;
     }
 }

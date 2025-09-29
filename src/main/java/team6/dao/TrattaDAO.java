@@ -1,14 +1,44 @@
 package team6.dao;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
 import team6.entities.Tratta;
+import team6.entities.Venditore;
+import team6.exeptions.NotFoundException;
+
 import java.math.BigInteger;
 import java.util.List;
+import java.util.UUID;
 
 public class TrattaDAO {
+    private final EntityManager entityManager;
 
-    public void save(Tratta tratta) {}
+    public TrattaDAO (EntityManager entityManager){
+        this.entityManager=entityManager;
+    }
 
-    public Tratta findById(String id) { return null; }
+    public void save(Tratta tratta) {
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        entityManager.persist(tratta);
+        transaction.commit();
+        System.out.println("La tratta " + tratta.getId() + " è stato aggiunta.");
+    }
+
+    public Tratta findById(UUID id) {
+        Tratta found = entityManager.find(Tratta.class, id);
+        if(found==null) throw new NotFoundException(id);
+        return found;
+    }
+
+    public void findAndDelete (UUID id){
+        Tratta found = this.findById(id);
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        entityManager.remove(found);
+        transaction.commit();
+        System.out.println("La tratta " + found.getId() + " è stata rimossa.");
+    }
 
     public List<Tratta> findAll() { return null; }
 

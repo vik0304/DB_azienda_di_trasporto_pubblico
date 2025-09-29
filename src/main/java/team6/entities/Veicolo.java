@@ -1,14 +1,16 @@
 package team6.entities;
 
+import java.util.UUID;
+
 public class Veicolo {
-    public String id;
+    public UUID id;
     public String tipoMezzo;
     public int capienza;
     public boolean inManutenzione;
 
     public Veicolo() {}
 
-    public Veicolo(String id, String tipoMezzo, int capienza, boolean inManutenzione) {
+    public Veicolo(UUID id, String tipoMezzo, int capienza, boolean inManutenzione) {
         this.id = id;
         this.tipoMezzo = tipoMezzo;
         this.capienza = capienza;
@@ -17,5 +19,9 @@ public class Veicolo {
 
     public String toString() {
         return "Veicolo: " + id + " " + tipoMezzo + " " + capienza + " " + inManutenzione;
+    }
+
+    public UUID getId() {
+        return id;
     }
 }
