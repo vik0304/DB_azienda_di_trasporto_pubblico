@@ -10,7 +10,7 @@ import java.util.UUID;
 public class Tessera {
     @Id
     private UUID id;
-    @Column
+    @Column(name = "data_di_emissione")
     private LocalDate dataDiEmissione;
 
     @ManyToOne
@@ -29,5 +29,37 @@ public class Tessera {
 
     // COSTRUTTORE VUOTO PER JPA
     public Tessera(){
+    }
+
+    // LISTA METODI
+
+    // GETTER/SETTER
+
+    public UUID getId() {
+        return id;
+    }
+
+    public LocalDate getDataDiEmissione() {
+        return dataDiEmissione;
+    }
+
+    public void setDataDiEmissione(LocalDate dataDiEmissione) {
+        this.dataDiEmissione = dataDiEmissione;
+    }
+
+    public Utente getIdUtente() {
+        return idUtente;
+    }
+
+    public void setIdUtente(Utente idUtente) {
+        this.idUtente = idUtente;
+    }
+
+    public List<Abbonamento> getAbbonamenti() {
+        return abbonamenti;
+    }
+
+    public void setAbbonamenti(List<Abbonamento> abbonamenti) {
+        this.abbonamenti = abbonamenti;
     }
 }

@@ -27,4 +27,27 @@ public class Manutenzione {
     // COSTRUTTORE VUOTO PER JPA
     public Manutenzione(){
     }
+
+    // LISTA METODI
+
+    // GETTER/SETTER
+    public UUID getId() {
+        return id;
+    }
+
+    public LocalDate getDataDiInizio() {
+        return dataDiInizio;
+    }
+
+    public void setDataDiInizio(LocalDate dataDiInizio) {
+        this.dataDiInizio = dataDiInizio;
+    }
+
+    public LocalDate getDataDiFine() {
+        return dataDiFine;
+    }
+
+    public void setDataDiFine(LocalDate dataDiFine) {
+        this.dataDiFine = dataDiFine;
+    }
 }

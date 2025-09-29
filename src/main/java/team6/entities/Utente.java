@@ -34,4 +34,44 @@ public class Utente {
     // COSTRUTTORE VUOTO PER JPA
     public Utente(){
     }
+
+    // LISTA METODI
+
+    // GETTER/SETTER
+
+    public UUID getCodice_fiscale() {
+        return codice_fiscale;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getCognome() {
+        return cognome;
+    }
+
+    public void setCognome(String cognome) {
+        this.cognome = cognome;
+    }
+
+    public LocalDate getDataDiNascita() {
+        return dataDiNascita;
+    }
+
+    public void setDataDiNascita(LocalDate dataDiNascita) {
+        this.dataDiNascita = dataDiNascita;
+    }
+
+    public List<Tessera> getTessere() {
+        return tessere;
+    }
+
+    public void setTessere(List<Tessera> tessere) {
+        this.tessere = tessere;
+    }
 }

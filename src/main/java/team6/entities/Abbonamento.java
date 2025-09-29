@@ -32,4 +32,34 @@ public class Abbonamento {
     public Abbonamento(){
     }
 
+    // LISTA METODI
+
+    // GETTER/SETTER
+    public UUID getNumeroTessera() {
+        return numeroTessera;
+    }
+
+    public LocalDate getDataAcquisto() {
+        return dataAcquisto;
+    }
+
+    public void setDataAcquisto(LocalDate dataAcquisto) {
+        this.dataAcquisto = dataAcquisto;
+    }
+
+    public LocalDate getDataEmissione() {
+        return dataEmissione;
+    }
+
+    public void setDataEmissione(LocalDate dataEmissione) {
+        this.dataEmissione = dataEmissione;
+    }
+
+    public Tessera getIdTessera() {
+        return idTessera;
+    }
+
+    public void setIdTessera(Tessera idTessera) {
+        this.idTessera = idTessera;
+    }
 }
