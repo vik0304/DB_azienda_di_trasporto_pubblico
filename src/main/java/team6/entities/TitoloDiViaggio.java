@@ -1,0 +1,26 @@
+package team6.entities;
+
+import jakarta.persistence.*;
+
+import java.time.LocalDate;
+import java.util.UUID;
+
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Table(name = "titolo_di_viaggio")
+public abstract class TitoloDiViaggio {
+    @Id
+    @GeneratedValue
+    protected UUID id;
+    @Column(name = "data_acquisto")
+    protected LocalDate dataAcquisto;
+    @ManyToOne
+    @JoinColumn(name="id_venditore", nullable = false)
+    protected Venditore venditore;
+
+    public TitoloDiViaggio(){};
+
+    public TitoloDiViaggio(LocalDate dataAcquisto){
+        this.dataAcquisto=dataAcquisto;
+    }
+}
