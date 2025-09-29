@@ -24,13 +24,13 @@ public class VeicoloDAO {
         System.out.println("Il veicolo " + veicolo.getId() + " è stato aggiunto.");
     }
 
-    public Veicolo findById(UUID id) {
+    public Veicolo findById(long id) {
         Veicolo found = entityManager.find(Veicolo.class, id);
         if(found==null) throw new NotFoundException(id);
         return found;
     }
 
-    public void findAndDelete (UUID id){
+    public void findAndDelete (long id){
         Veicolo found = this.findById(id);
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();

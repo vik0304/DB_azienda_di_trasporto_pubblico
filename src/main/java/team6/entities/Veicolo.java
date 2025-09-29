@@ -7,9 +7,9 @@ import jakarta.persistence.*;
 @Table(name = "veicolo")
 public class Veicolo {
     @Id
-    @GeneratedValue
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    public UUID id;
+    public long id;
 
     @Column(name = "tipo_mezzo")
     public String tipoMezzo;
@@ -22,7 +22,7 @@ public class Veicolo {
 
     public Veicolo() {}
 
-    public Veicolo(UUID id, String tipoMezzo, int capienza, boolean inManutenzione) {
+    public Veicolo(long id, String tipoMezzo, int capienza, boolean inManutenzione) {
         this.id = id;
         this.tipoMezzo = tipoMezzo;
         this.capienza = capienza;
@@ -33,7 +33,7 @@ public class Veicolo {
         return "Veicolo: " + id + " " + tipoMezzo + " " + capienza + " " + inManutenzione;
     }
 
-    public UUID getId() {
+    public long getId() {
         return id;
     }
 }
