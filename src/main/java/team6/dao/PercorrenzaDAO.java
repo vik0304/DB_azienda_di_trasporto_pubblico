@@ -19,17 +19,9 @@ public class PercorrenzaDAO {
 
     public void save(Percorrenza percorrenza) {
         EntityTransaction transaction = entityManager.getTransaction();
-        try {
-            transaction.begin();
-            entityManager.persist(percorrenza);
-            transaction.commit();
-            System.out.println("La percorrenza " + percorrenza.getId() + " è stato aggiunta.");
-        } catch (Exception e) {
-            if (transaction.isActive()) {
-                transaction.rollback();
-            }
-            throw e;
-        }
+        transaction.begin();
+        entityManager.persist(percorrenza);
+        transaction.commit();
     }
 
     public Percorrenza findById(UUID id) {
@@ -39,19 +31,11 @@ public class PercorrenzaDAO {
     }
 
     public void findAndDelete(UUID id) {
-        Percorrenza found = this.findById(id);
+        Percorrenza found = findById(id);
         EntityTransaction transaction = entityManager.getTransaction();
-        try {
-            transaction.begin();
-            entityManager.remove(found);
-            transaction.commit();
-            System.out.println("La percorrenza " + found.getId() + " è stato rimossa.");
-        } catch (Exception e) {
-            if (transaction.isActive()) {
-                transaction.rollback();
-            }
-            throw e;
-        }
+        transaction.begin();
+        entityManager.remove(found);
+        transaction.commit();
     }
 
     public List<Percorrenza> findAll() { return null; }

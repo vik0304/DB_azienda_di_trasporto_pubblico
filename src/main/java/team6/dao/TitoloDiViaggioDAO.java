@@ -15,26 +15,24 @@ public class TitoloDiViaggioDAO {
         this.entityManager=entityManager;
     }
 
-    public void save (TitoloDiViaggio titoloDiViaggio){
+    public void save(TitoloDiViaggio titoloDiViaggio) {
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
         entityManager.persist(titoloDiViaggio);
         transaction.commit();
-        System.out.println("Il titolo " + titoloDiViaggio.getId() + " è stato aggiunto.");
     }
 
-    public TitoloDiViaggio findById(UUID id){
+    public TitoloDiViaggio findById(UUID id) {
         TitoloDiViaggio found = entityManager.find(TitoloDiViaggio.class, id);
-        if(found==null) throw new NotFoundException(id);
+        if (found == null) throw new NotFoundException(id);
         return found;
     }
 
-    public void findAndDelete (UUID id){
-        TitoloDiViaggio found = this.findById(id);
+    public void findAndDelete(UUID id) {
+        TitoloDiViaggio found = findById(id);
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
         entityManager.remove(found);
         transaction.commit();
-        System.out.println("Il titolo " + found.getId() + " è stato rimosso.");
     }
 }

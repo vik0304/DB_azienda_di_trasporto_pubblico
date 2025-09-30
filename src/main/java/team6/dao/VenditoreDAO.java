@@ -15,26 +15,24 @@ public class VenditoreDAO {
         this.entityManager=entityManager;
     }
 
-    public void save (Venditore venditore){
+    public void save(Venditore venditore) {
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
         entityManager.persist(venditore);
         transaction.commit();
-        System.out.println("Il venditore " + venditore.getId() + " è stato aggiunto.");
     }
 
-    public Venditore findById(UUID id){
+    public Venditore findById(UUID id) {
         Venditore found = entityManager.find(Venditore.class, id);
-        if(found==null) throw new NotFoundException(id);
+        if (found == null) throw new NotFoundException(id);
         return found;
     }
 
-    public void findAndDelete (UUID id){
-        Venditore found = this.findById(id);
+    public void findAndDelete(UUID id) {
+        Venditore found = findById(id);
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
         entityManager.remove(found);
         transaction.commit();
-        System.out.println("Il venditore " + found.getId() + " è stato rimosso.");
     }
 }

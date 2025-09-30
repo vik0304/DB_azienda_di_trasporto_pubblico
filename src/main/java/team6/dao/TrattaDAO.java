@@ -13,8 +13,8 @@ import java.util.UUID;
 public class TrattaDAO {
     private final EntityManager entityManager;
 
-    public TrattaDAO (EntityManager entityManager){
-        this.entityManager=entityManager;
+    public TrattaDAO(EntityManager entityManager) {
+        this.entityManager = entityManager;
     }
 
     public void save(Tratta tratta) {
@@ -22,22 +22,20 @@ public class TrattaDAO {
         transaction.begin();
         entityManager.persist(tratta);
         transaction.commit();
-        System.out.println("La tratta " + tratta.getId() + " è stato aggiunta.");
     }
 
     public Tratta findById(UUID id) {
         Tratta found = entityManager.find(Tratta.class, id);
-        if(found==null) throw new NotFoundException(id);
+        if (found == null) throw new NotFoundException(id);
         return found;
     }
 
-    public void findAndDelete (UUID id){
-        Tratta found = this.findById(id);
+    public void findAndDelete(UUID id) {
+        Tratta found = findById(id);
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
         entityManager.remove(found);
         transaction.commit();
-        System.out.println("La tratta " + found.getId() + " è stata rimossa.");
     }
 
     public List<Tratta> findAll() { return null; }
