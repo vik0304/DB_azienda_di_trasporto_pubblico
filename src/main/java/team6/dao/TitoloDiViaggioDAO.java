@@ -5,6 +5,7 @@ import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
 import team6.entities.Biglietto;
 import team6.entities.TitoloDiViaggio;
+import team6.entities.Venditore;
 import team6.exeptions.NotFoundException;
 
 import java.time.LocalDate;
@@ -40,22 +41,35 @@ public class TitoloDiViaggioDAO {
         transaction.commit();
     }
 
-    public List<Biglietto> trovaBigliettiVidimatiPerMezzo(long idMezzo) {
+    public long trovaBigliettiVidimatiPerMezzo(long idMezzo) {
         TypedQuery<Biglietto> query = entityManager.createQuery(
             "SELECT b FROM Biglietto b WHERE b.validato = true AND b.veicolo.id = :idMezzo",
             Biglietto.class
         );
         query.setParameter("idMezzo", idMezzo);
-        return query.getResultList();
+        return query.getResultList().size();
     }
 
-    public List<Biglietto> trovaBigliettiVidimatiPerPeriodo(LocalDate dataInizio, LocalDate dataFine) {
+    public long trovaBigliettiVidimatiPerPeriodo(LocalDate dataInizio, LocalDate dataFine) {
         TypedQuery<Biglietto> query = entityManager.createQuery(
             "SELECT b FROM Biglietto b WHERE b.validato = true AND b.dataAcquisto BETWEEN :dataInizio AND :dataFine",
             Biglietto.class
         );
         query.setParameter("dataInizio", dataInizio);
         query.setParameter("dataFine", dataFine);
-        return query.getResultList();
+        return query.getResultList().size();
+    }
+
+    public long titoliByPeriodo (LocalDate inizioPeriodo, LocalDate finePeriodo){
+        TypedQuery<TitoloDiViaggio> query = entityManager.createQuery("SELECT t FROM TitoloDiViaggio t WHERE t.dataAcquisto < :start AND t.dataAcquisto > :end", TitoloDiViaggio.class);
+        query.setParameter("start", inizioPeriodo);
+        query.setParameter("end", finePeriodo);
+        return query.getResultList().size();
+    }
+
+    public long titoliByVenditore (Venditore venditore){
+        TypedQuery<TitoloDiViaggio> query = entityManager.createQuery("SELECT t FROM TitoliDiViaggio t WHERE t.venditore = :venditore", TitoloDiViaggio.class);
+        query.setParameter("venditore", venditore);
+        return query.getResultList().size();
     }
 }
