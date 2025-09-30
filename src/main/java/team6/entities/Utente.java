@@ -20,7 +20,7 @@ public class Utente {
     @Column(name = "data_di_nascita")
     private LocalDate dataDiNascita;
 
-    @OneToMany(mappedBy = "utente")
+    @OneToMany(mappedBy = "idUtente")
     private List<Tessera> tessere;
 
     // LISTA COSTRUTTORE
