@@ -8,12 +8,10 @@ import java.util.UUID;
 
 @Entity
 public class Abbonamento extends TitoloDiViaggio{
-    @Id
-    @GeneratedValue
-    @Column(name = "id_abbonamento")
-    private UUID idAbbonamento;
-    @Column(name = "data_emissione")
-    private LocalDate dataEmissione;
+    @Column(name = "tipo_abbonamento")
+    private TipoAbbonamento tipoAbbonamento;
+    @Column(name = "data_scadenza")
+    private LocalDate dataScadenza;
     @ManyToOne
     @JoinColumn(name = "id_tessera")
     private Tessera idTessera;
@@ -21,9 +19,14 @@ public class Abbonamento extends TitoloDiViaggio{
     public Abbonamento(){
     }
 
-    public Abbonamento(LocalDate dataEmissione, Tessera idTessera, LocalDate dataAcquisto, Venditore venditore){
+    public Abbonamento(TipoAbbonamento tipoAbbonamento, Tessera idTessera, LocalDate dataAcquisto, Venditore venditore){
         super(dataAcquisto, venditore);
-        this.dataEmissione = dataEmissione;
+        this.tipoAbbonamento=tipoAbbonamento;
+        if(tipoAbbonamento==TipoAbbonamento.MENSILE){
+            this.dataScadenza = dataAcquisto.plusDays(30);
+        }else if (tipoAbbonamento==TipoAbbonamento.SETTIMANALE){
+            this.dataScadenza = dataAcquisto.plusDays(7);
+        }
         this.idTessera = idTessera;
     }
 
