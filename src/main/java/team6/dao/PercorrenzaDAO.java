@@ -13,31 +13,45 @@ import java.util.UUID;
 public class PercorrenzaDAO {
     private final EntityManager entityManager;
 
-    public PercorrenzaDAO (EntityManager entityManager){
-        this.entityManager=entityManager;
+    public PercorrenzaDAO(EntityManager entityManager) {
+        this.entityManager = entityManager;
     }
 
     public void save(Percorrenza percorrenza) {
         EntityTransaction transaction = entityManager.getTransaction();
-        transaction.begin();
-        entityManager.persist(percorrenza);
-        transaction.commit();
-        System.out.println("La percorrenza " + percorrenza.getId() + " è stato aggiunta.");
+        try {
+            transaction.begin();
+            entityManager.persist(percorrenza);
+            transaction.commit();
+            System.out.println("La percorrenza " + percorrenza.getId() + " è stato aggiunta.");
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            throw e;
+        }
     }
 
     public Percorrenza findById(UUID id) {
         Percorrenza found = entityManager.find(Percorrenza.class, id);
-        if(found==null) throw new NotFoundException(id);
+        if (found == null) throw new NotFoundException(id);
         return found;
     }
 
-    public void findAndDelete (UUID id){
+    public void findAndDelete(UUID id) {
         Percorrenza found = this.findById(id);
         EntityTransaction transaction = entityManager.getTransaction();
-        transaction.begin();
-        entityManager.remove(found);
-        transaction.commit();
-        System.out.println("La percorrenza " + found.getId() + " è stato rimossa.");
+        try {
+            transaction.begin();
+            entityManager.remove(found);
+            transaction.commit();
+            System.out.println("La percorrenza " + found.getId() + " è stato rimossa.");
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            throw e;
+        }
     }
 
     public List<Percorrenza> findAll() { return null; }
