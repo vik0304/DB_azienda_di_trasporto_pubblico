@@ -9,19 +9,20 @@ import java.util.UUID;
 public class Manutenzione {
     @Id
     private UUID id;
-
     @Column(name = "data_di_inizio")
     private LocalDate dataDiInizio;
-
     @Column(name = "data_di_fine")
     private LocalDate dataDiFine;
+    @Enumerated(EnumType.STRING)
+    private CauseManuntenzione causeManuntenzione;
+
 
     @ManyToOne
     @JoinColumn(name = "id_mezzo")
     private Veicolo veicolo;
 
     // LISTA COSTRUTTORI
-    public Manutenzione(LocalDate dataDiInizio, LocalDate dataDiFine){
+    public Manutenzione(LocalDate dataDiInizio, LocalDate dataDiFine, CauseManuntenzione causeManuntenzione){
         this.dataDiInizio = dataDiInizio;
         this.dataDiFine = dataDiFine;
     }

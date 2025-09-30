@@ -12,11 +12,11 @@ public class Tessera {
     private UUID id;
     @Column(name = "data_di_emissione")
     private LocalDate dataDiEmissione;
-
     @ManyToOne
     @JoinColumn(name = "id_utente")
     private Utente idUtente;
-
+    @Column (name = "data_scadenza")
+    private LocalDate dataScadenza;
     @OneToMany(mappedBy = "idTessera")
     private List<Abbonamento> abbonamenti;
 
@@ -25,6 +25,7 @@ public class Tessera {
         this.dataDiEmissione=dataDiEmissione;
         this.idUtente = idUtente;
         this.abbonamenti = abbonamenti;
+        this.dataScadenza= dataDiEmissione.plusYears(1);
     }
 
     // COSTRUTTORE VUOTO PER JPA

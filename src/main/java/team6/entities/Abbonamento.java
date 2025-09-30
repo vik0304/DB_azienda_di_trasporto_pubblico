@@ -9,6 +9,7 @@ import java.util.UUID;
 @Entity
 public class Abbonamento extends TitoloDiViaggio{
     @Column(name = "tipo_abbonamento")
+    @Enumerated(EnumType.STRING)
     private TipoAbbonamento tipoAbbonamento;
     @Column(name = "data_scadenza")
     private LocalDate dataScadenza;
