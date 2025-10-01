@@ -2,12 +2,11 @@ package team6.dao;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
-import team6.entities.Tratta;
 import team6.entities.Veicolo;
 import team6.exeptions.NotFoundException;
 
 import java.util.List;
-import java.util.UUID;
+import java.util.Scanner;
 
 public class VeicoloDAO {
     private final EntityManager entityManager;
@@ -35,6 +34,25 @@ public class VeicoloDAO {
         transaction.begin();
         entityManager.remove(found);
         transaction.commit();
+    }
+
+    public void creaVeicoloDaInput(Scanner scanner) {
+        System.out.println(" tipo di mezzo (es. autobus, tram):");
+        String tipoMezzo = scanner.nextLine();
+
+        System.out.println("Inserisci la capienza del mezzo:");
+        int capienza = Integer.parseInt(scanner.nextLine());
+
+        System.out.println("Il mezzo è in manutenzione? (true/false):");
+        boolean inManutenzione = Boolean.parseBoolean(scanner.nextLine());
+
+        Veicolo nuovoVeicolo = new Veicolo();
+        nuovoVeicolo.tipoMezzo = tipoMezzo;
+        nuovoVeicolo.capienza = capienza;
+        nuovoVeicolo.inManutenzione = inManutenzione;
+
+        save(nuovoVeicolo);
+        System.out.println("Nuovo veicolo creato con ID: " + nuovoVeicolo.getId());
     }
 
     public List<Veicolo> findAll() { return null; }

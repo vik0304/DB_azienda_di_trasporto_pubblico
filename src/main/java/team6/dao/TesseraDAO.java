@@ -2,9 +2,13 @@ package team6.dao;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.TypedQuery;
 import team6.entities.Tessera;
+import team6.entities.Utente;
 import team6.exeptions.NotFoundException;
 
+import java.time.LocalDate;
+import java.util.Scanner;
 import java.util.UUID;
 
 public class TesseraDAO {
@@ -44,5 +48,34 @@ public class TesseraDAO {
         transaction.commit();
 
         System.out.println("La tessera " + found.getId() + " è stata rimossa");
+    }
+
+    public void creaTesseraDaInput(Scanner scanner) {
+        try {
+            System.out.println("Inserisci l'ID (UUID) dell'utente per associare la tessera:");
+            UUID utenteId = UUID.fromString(scanner.nextLine());
+
+            UtenteDAO utenteDAO = new UtenteDAO(this.entityManager);
+            Utente utente = utenteDAO.findById(utenteId);
+
+            Tessera nuovaTessera = new Tessera();
+            nuovaTessera.setId(UUID.randomUUID());
+            nuovaTessera.setDataDiEmissione(LocalDate.now());
+            nuovaTessera.setDataScadenza(LocalDate.now().plusYears(1));
+            nuovaTessera.setIdUtente(utente);
+
+            save(nuovaTessera);
+
+        } catch (NotFoundException e) {
+            System.err.println("Utente non trovato. Impossibile creare la tessera.");
+        } catch (IllegalArgumentException e) {
+            System.err.println("ID utente non valido. Assicurati di inserire un UUID corretto.");
+        }
+    }
+    public long abbonamentiAttiviPerTessera(UUID idTessera){
+        TypedQuery<Tessera> query = entityManager.createQuery("SELECT a FROM Abbonamento a WHERE a.tessera.id = :tesseraId AND a.dataScadenza > :oggi", Tessera.class);
+        query.setParameter("tesseraId", idTessera);
+        query.setParameter("oggi", LocalDate.now());
+        return query.getResultList().size();
     }
 }

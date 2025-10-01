@@ -3,6 +3,7 @@ package team6;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import team6.dao.TitoloDiViaggioDAO;
 import team6.dao.UtenteDAO;
 
 import java.util.Scanner;
@@ -14,6 +15,9 @@ public class Application {
 
     public static void main(String[] args) {
         EntityManager em = emf.createEntityManager();
+
+        TitoloDiViaggioDAO titoloDiViaggioDAO = new TitoloDiViaggioDAO(em);
+        titoloDiViaggioDAO.trovaBigliettiPerData(s);
         System.out.println("Hello World!");
         UtenteDAO ud = new UtenteDAO(em);
 
