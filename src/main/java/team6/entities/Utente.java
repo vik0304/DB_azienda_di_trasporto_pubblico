@@ -45,7 +45,7 @@ public class Utente {
     // GETTER/SETTER
 
     public UUID getCodice_fiscale() {
-        return codice_fiscale;
+        return codiceFiscale;
     }
 
     public String getNome() {
