@@ -113,7 +113,21 @@ public class TitoloDiViaggioDAO {
     }
 
     public long titoliByPeriodo (LocalDate inizioPeriodo, LocalDate finePeriodo){
-        TypedQuery<TitoloDiViaggio> query = entityManager.createQuery("SELECT t FROM TitoloDiViaggio t WHERE t.dataAcquisto < :start AND t.dataAcquisto > :end", TitoloDiViaggio.class);
+        TypedQuery<TitoloDiViaggio> query = entityManager.createQuery("SELECT t FROM TitoloDiViaggio t WHERE t.dataAcquisto > :start AND t.dataAcquisto < :end", TitoloDiViaggio.class);
+        query.setParameter("start", inizioPeriodo);
+        query.setParameter("end", finePeriodo);
+        return query.getResultList().size();
+    }
+
+    public long bigliettiByPeriodo (LocalDate inizioPeriodo, LocalDate finePeriodo){
+        TypedQuery<Biglietto> query = entityManager.createQuery("SELECT b FROM Biglietto b WHERE b.dataAcquisto > :start AND b.dataAcquisto < :end", Biglietto.class);
+        query.setParameter("start", inizioPeriodo);
+        query.setParameter("end", finePeriodo);
+        return query.getResultList().size();
+    }
+
+    public long abbonamentiByPeriodo (LocalDate inizioPeriodo, LocalDate finePeriodo){
+        TypedQuery<Abbonamento> query = entityManager.createQuery("SELECT a FROM Abbonamento a WHERE a.dataAcquisto > :start AND a.dataAcquisto < :end", Abbonamento.class);
         query.setParameter("start", inizioPeriodo);
         query.setParameter("end", finePeriodo);
         return query.getResultList().size();
@@ -134,24 +148,20 @@ public class TitoloDiViaggioDAO {
     }
 
     public void trovaBigliettiPerData(Scanner scanner) {
-        System.out.println("Inserisci la data per cui vuoi cercare i biglietti (formato YYYY-MM-DD):");
-        String dataInput = scanner.nextLine();
+        System.out.println("Inserisci la data di inizio del periodo (formato YYYY-MM-DD):");
+        String dataInputStart = scanner.nextLine();
+        System.out.println("Inserisci la data di fine del periodo (formato YYYY-MM-DD):");
+        String dataInputEnd = scanner.nextLine();
         try {
-            LocalDate dataRicerca = LocalDate.parse(dataInput);
-            TypedQuery<Biglietto> query = entityManager.createQuery(
-                    "SELECT b FROM Biglietto b WHERE b.dataAcquisto = :dataRicerca",
-                    Biglietto.class
-            );
-            query.setParameter("dataRicerca", dataRicerca);
-            List<Biglietto> biglietti = query.getResultList();
-
-            if (biglietti.isEmpty()) {
-                System.out.println("Nessun biglietto trovato per la data " + dataRicerca);
+            LocalDate dataRicercaStart = LocalDate.parse(dataInputStart);
+            LocalDate dataRicercaEnd = LocalDate.parse(dataInputEnd);
+            long numTitoliDiViaggio = titoliByPeriodo(dataRicercaStart, dataRicercaEnd);
+            if(numTitoliDiViaggio==0){
+                System.out.println("Non è stato venduto nessun titolo di viaggio nel periodo scelto");
             } else {
-                System.out.println("Biglietti trovati per la data " + dataRicerca + ":");
-                biglietti.forEach(biglietto -> {
-                    System.out.println("- ID Biglietto: " + biglietto.getId());
-                });
+                long numBiglietti = bigliettiByPeriodo(dataRicercaStart, dataRicercaEnd);
+                long numAbbonamenti = abbonamentiByPeriodo(dataRicercaStart, dataRicercaEnd);
+                System.out.println("Nel periodo selezionato sono stati venduti " + numTitoliDiViaggio + " dei quali " + numBiglietti + " sono biglietti e " + numAbbonamenti + " sono abbonamenti.");
             }
         } catch (java.time.format.DateTimeParseException e) {
             System.err.println("Formato data non valido. Usa il formato YYYY-MM-DD.");

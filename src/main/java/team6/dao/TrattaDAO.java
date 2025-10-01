@@ -3,7 +3,6 @@ package team6.dao;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import team6.entities.Tratta;
-import team6.entities.Venditore;
 import team6.exeptions.NotFoundException;
 
 import java.math.BigInteger;

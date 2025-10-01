@@ -3,8 +3,10 @@ package team6;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import team6.dao.TesseraDAO;
 import team6.dao.TitoloDiViaggioDAO;
 import team6.dao.UtenteDAO;
+import team6.dao.VeicoloDAO;
 
 import java.util.Scanner;
 import java.util.UUID;
@@ -16,19 +18,20 @@ public class Application {
     public static void main(String[] args) {
         EntityManager em = emf.createEntityManager();
 
-        TitoloDiViaggioDAO titoloDiViaggioDAO = new TitoloDiViaggioDAO(em);
-        titoloDiViaggioDAO.trovaBigliettiPerData(s);
+        TitoloDiViaggioDAO tdv = new TitoloDiViaggioDAO(em);
         System.out.println("Hello World!");
         UtenteDAO ud = new UtenteDAO(em);
+        VeicoloDAO vd = new VeicoloDAO(em);
+        TesseraDAO td = new TesseraDAO(em);
 
-        mainMenu(ud);
+        mainMenu(ud, vd, tdv, td);
 
         s.close();
         em.close();
         emf.close();
     }
 
-    public static void mainMenu(UtenteDAO ud) {
+    public static void mainMenu(UtenteDAO ud, VeicoloDAO vd, TitoloDiViaggioDAO tdv, TesseraDAO td) {
         boolean attivo = true;
         while (attivo) {
             System.out.println("Benvenuto, inserisci il tuo ID per iniziare ad utilizzare software oppure exit per uscire.");
@@ -42,7 +45,7 @@ public class Application {
                     String userType = ud.userType(utenteId);
                     System.out.println("Avvio applicazione . . .");
                     if (userType.equals("ADMIN")) {
-                        menuAdmin();
+                        menuAdmin(vd, tdv, td);
                     } else if (userType.equals("USER")) {
                         menuUser();
                     }
@@ -53,14 +56,14 @@ public class Application {
         }
     }
 
-    public static void menuAdmin() {
+    public static void menuAdmin(VeicoloDAO vd, TitoloDiViaggioDAO tdv, TesseraDAO td) {
         System.out.println("Benvenuto admin, seleziona l'operazione che vuoi eseguire oppure 0 per uscire.");
         int option;
         boolean isWorking = true;
         while (isWorking) {
-            System.out.println("1- ");
-            System.out.println("2- ");
-            System.out.println("3- ");
+            System.out.println("1- Aggiungi un nuovo veicolo.");
+            System.out.println("2- Verifica biglietti venduti in un periodo");
+            System.out.println("3- Crea una nuova tessera");
             System.out.println("4- ");
             System.out.println("5- ");
             System.out.println("6- ");
@@ -74,13 +77,13 @@ public class Application {
                         isWorking = false;
                         break;
                     case 1:
-
+                        vd.creaVeicoloDaInput(s);
                         break;
                     case 2:
-
+                        tdv.trovaBigliettiPerData(s);
                         break;
                     case 3:
-
+                        td.creaTesseraDaInput(s);
                         break;
                     case 4:
 
