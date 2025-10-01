@@ -2,6 +2,8 @@ package team6.dao;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
 import team6.entities.Utente;
 import team6.exeptions.NotFoundException;
 
@@ -45,5 +47,11 @@ public class UtenteDAO {
         transaction.commit();
 
         System.out.println("L'utente " + found.getCodice_fiscale() + " è stato rimosso");
+    }
+
+    public String userType(UUID id){
+        TypedQuery<String> query = entityManager.createQuery("SELECT u.tipoUtente FROM Utente u WHERE u.codiceFiscale = :id", String.class);
+        query.setParameter("id", id);
+        return query.getSingleResult();
     }
 }
