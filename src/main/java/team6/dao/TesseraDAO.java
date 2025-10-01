@@ -2,9 +2,11 @@ package team6.dao;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.TypedQuery;
 import team6.entities.Tessera;
 import team6.exeptions.NotFoundException;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 public class TesseraDAO {
@@ -44,5 +46,11 @@ public class TesseraDAO {
         transaction.commit();
 
         System.out.println("La tessera " + found.getId() + " è stata rimossa");
+    }
+    public long abbonamentiAttiviPerTessera(UUID idTessera){
+        TypedQuery<Tessera> query = entityManager.createQuery("SELECT a FROM Abbonamento a WHERE a.tessera.id = :tesseraId AND a.dataScadenza > :oggi", Tessera.class);
+        query.setParameter("tesseraId", idTessera);
+        query.setParameter("oggi", LocalDate.now());
+        return query.getResultList().size();
     }
 }
