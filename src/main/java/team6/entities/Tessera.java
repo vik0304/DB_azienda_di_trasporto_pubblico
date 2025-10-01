@@ -63,4 +63,16 @@ public class Tessera {
     public void setAbbonamenti(List<Abbonamento> abbonamenti) {
         this.abbonamenti = abbonamenti;
     }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public LocalDate getDataScadenza() {
+        return dataScadenza;
+    }
+
+    public void setDataScadenza(LocalDate dataScadenza) {
+        this.dataScadenza = dataScadenza;
+    }
 }
