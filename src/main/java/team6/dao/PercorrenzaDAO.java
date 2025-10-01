@@ -44,7 +44,7 @@ public class PercorrenzaDAO {
 
     public long numPercorrenza(UUID trattaId, UUID mezzoId){
         TypedQuery<Long> query = entityManager.createQuery(
-                "SELECT COUNT(p) FROM Percorrenza WHERE tratta_id = :trattaId AND p.mezzo.id = :mezzoId", Long.class
+                "SELECT COUNT(p) FROM Percorrenza p WHERE p.tratta.id = :trattaId AND p.mezzo.id = :mezzoId", Long.class
         );
         query.setParameter("trattaId", trattaId);
         query.setParameter("mezzoId", mezzoId);
