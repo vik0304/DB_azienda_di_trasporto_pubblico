@@ -72,6 +72,7 @@ public class TesseraDAO {
             System.err.println("ID utente non valido. Assicurati di inserire un UUID corretto.");
         }
     }
+    
     public long abbonamentiAttiviPerTessera(UUID idTessera){
         TypedQuery<Tessera> query = entityManager.createQuery("SELECT a FROM Abbonamento a WHERE a.tessera.id = :tesseraId AND a.dataScadenza > :oggi", Tessera.class);
         query.setParameter("tesseraId", idTessera);
