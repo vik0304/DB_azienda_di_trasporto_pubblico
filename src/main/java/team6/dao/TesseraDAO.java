@@ -51,6 +51,13 @@ public class TesseraDAO {
         System.out.println("La tessera " + found.getId() + " è stata rimossa");
     }
 
+    public Abbonamento abbonamentiAttiviPerTessera(UUID idTessera){
+        TypedQuery<Abbonamento> query = entityManager.createQuery("SELECT a FROM Abbonamento a WHERE a.tessera.id = :tesseraId AND a.dataScadenza > :oggi", Abbonamento.class);
+        query.setParameter("tesseraId", idTessera);
+        query.setParameter("oggi", LocalDate.now());
+        return query.getSingleResult();
+    }
+
     public void creaTesseraDaInput(Scanner scanner) {
         try {
             System.out.println("Inserisci l'ID (UUID) dell'utente per associare la tessera:");
@@ -72,12 +79,5 @@ public class TesseraDAO {
         } catch (IllegalArgumentException e) {
             System.err.println("ID utente non valido. Assicurati di inserire un UUID corretto.");
         }
-    }
-
-    public Abbonamento abbonamentiAttiviPerTessera(UUID idTessera){
-        TypedQuery<Abbonamento> query = entityManager.createQuery("SELECT a FROM Abbonamento a WHERE a.tessera.id = :tesseraId AND a.dataScadenza > :oggi", Abbonamento.class);
-        query.setParameter("tesseraId", idTessera);
-        query.setParameter("oggi", LocalDate.now());
-        return query.getSingleResult();
     }
 }

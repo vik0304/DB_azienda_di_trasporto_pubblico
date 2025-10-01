@@ -42,20 +42,6 @@ public class PercorrenzaDAO {
         transaction.commit();
     }
 
-    public List<Percorrenza> findAll() { return null; }
-
-    public void update(Percorrenza percorrenza) {}
-
-    public void delete(String id) {}
-
-    public List<Percorrenza> findByIdMezzo(String idMezzo) { return null; }
-
-    public List<Percorrenza> findByIdTratta(String idTratta) { return null; }
-
-    public List<Percorrenza> findByDataPartenza(LocalDate dataPartenza) { return null; }
-
-    public List<Percorrenza> findByDateRange(LocalDate startDate, LocalDate endDate) { return null; }
-
     public long numPercorrenza(UUID trattaId){
         TypedQuery<Long> query = entityManager.createQuery(
                 "SELECT COUNT(p) FROM Percorrenza WHERE tratta_id = :trattaId", Long.class
@@ -73,3 +59,17 @@ public class PercorrenzaDAO {
         return query.getSingleResult();
     }
 }
+//
+//    public List<Percorrenza> findAll() { return null; }
+//
+//    public void update(Percorrenza percorrenza) {}
+//
+//    public void delete(String id) {}
+//
+//    public List<Percorrenza> findByIdMezzo(String idMezzo) { return null; }
+//
+//    public List<Percorrenza> findByIdTratta(String idTratta) { return null; }
+//
+//    public List<Percorrenza> findByDataPartenza(LocalDate dataPartenza) { return null; }
+//
+//    public List<Percorrenza> findByDateRange(LocalDate startDate, LocalDate endDate) { return null; }
