@@ -3,8 +3,10 @@ package team6;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import team6.dao.TesseraDAO;
 import team6.dao.TitoloDiViaggioDAO;
 import team6.dao.UtenteDAO;
+import team6.dao.VeicoloDAO;
 
 import java.util.Scanner;
 import java.util.UUID;
@@ -16,19 +18,20 @@ public class Application {
     public static void main(String[] args) {
         EntityManager em = emf.createEntityManager();
 
-        TitoloDiViaggioDAO titoloDiViaggioDAO = new TitoloDiViaggioDAO(em);
-        titoloDiViaggioDAO.trovaBigliettiPerData(s);
+        TitoloDiViaggioDAO tdv = new TitoloDiViaggioDAO(em);
         System.out.println("Hello World!");
         UtenteDAO ud = new UtenteDAO(em);
+        VeicoloDAO vd = new VeicoloDAO(em);
+        TesseraDAO td = new TesseraDAO(em);
 
-        mainMenu(ud);
+        mainMenu(ud, vd, tdv, td);
 
         s.close();
         em.close();
         emf.close();
     }
 
-    public static void mainMenu(UtenteDAO ud) {
+    public static void mainMenu(UtenteDAO ud, VeicoloDAO vd, TitoloDiViaggioDAO tdv, TesseraDAO td) {
         boolean attivo = true;
         while (attivo) {
             System.out.println("Benvenuto, inserisci il tuo ID per iniziare ad utilizzare software oppure exit per uscire.");
@@ -42,7 +45,7 @@ public class Application {
                     String userType = ud.userType(utenteId);
                     System.out.println("Avvio applicazione . . .");
                     if (userType.equals("ADMIN")) {
-                        menuAdmin();
+                        menuAdmin(vd, tdv, td);
                     } else if (userType.equals("USER")) {
                         menuUser();
                     }
@@ -53,12 +56,12 @@ public class Application {
         }
     }
 
-    public static void menuAdmin() {
+    public static void menuAdmin(VeicoloDAO vd, TitoloDiViaggioDAO tdv, TesseraDAO td) {
         System.out.println("Benvenuto admin, seleziona l'operazione che vuoi eseguire oppure 0 per uscire.");
         int option;
         boolean isWorking = true;
         while (isWorking) {
-            System.out.println("1- ");
+            System.out.println("1- Menu inserimento dati");
             System.out.println("2- ");
             System.out.println("3- ");
             System.out.println("4- ");
@@ -66,6 +69,7 @@ public class Application {
             System.out.println("6- ");
             System.out.println("7- ");
             System.out.println("8- ");
+            System.out.println("9- ");
             System.out.println("0-  ");
             try {
                 option = Integer.parseInt(s.nextLine());
@@ -105,7 +109,71 @@ public class Application {
                 System.out.println("Errore: devi inserire un numero intero positivo.");
             }
         }
-    }public static void menuUser() {
+    }
+
+    public static void adminCreationMenu(){
+        System.out.println("Seleziona l'elemento che vuoi inserire");
+        int option;
+        boolean isWorking = true;
+        while (isWorking) {
+            System.out.println("1- Biglietto");
+            System.out.println("2- Abbonamento");
+            System.out.println("3- Utente");
+            System.out.println("4- Tessera");
+            System.out.println("5- Veicolo");
+            System.out.println("6- Manutenzione");
+            System.out.println("7- Tratta");
+            System.out.println("8- Percorrenza");
+            System.out.println("9- Rivenditore autorizzato");
+            System.out.println("10- Distributore automatico");
+            System.out.println("0-  Torna indietro");
+            try {
+                option = Integer.parseInt(s.nextLine());
+                switch (option) {
+                    case 0:
+                        isWorking = false;
+                        break;
+                    case 1:
+
+                        break;
+                    case 2:
+
+                        break;
+                    case 3:
+
+                        break;
+                    case 4:
+
+                        break;
+                    case 5:
+
+                        break;
+                    case 6:
+
+                        break;
+                    case 7:
+
+                        break;
+                    case 8:
+
+                        break;
+                    case 9:
+
+                        break;
+                    case 10:
+
+                        break;
+                    default:
+                        isWorking = true;
+                        break;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Errore: devi inserire un numero intero positivo.");
+            }
+        }
+    }
+
+    public static void menuUser() {
         System.out.println("Benvenuto, seleziona l'operazione che vuoi eseguire oppure 0 per uscire.");
         int option;
         boolean isWorking = true;
