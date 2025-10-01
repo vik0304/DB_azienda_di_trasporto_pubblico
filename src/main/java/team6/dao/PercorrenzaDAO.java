@@ -42,20 +42,22 @@ public class PercorrenzaDAO {
         transaction.commit();
     }
 
-    public long numPercorrenza(UUID trattaId){
+    public long numPercorrenza(UUID trattaId, UUID mezzoId){
         TypedQuery<Long> query = entityManager.createQuery(
-                "SELECT COUNT(p) FROM Percorrenza WHERE tratta_id = :trattaId", Long.class
+                "SELECT COUNT(p) FROM Percorrenza WHERE tratta_id = :trattaId AND p.mezzo.id = :mezzoId", Long.class
         );
         query.setParameter("trattaId", trattaId);
+        query.setParameter("mezzoId", mezzoId);
         return query.getSingleResult();
     }
 
-    public long tempoEffettivoTratta(UUID trattaid){
+    public long tempoEffettivoTratta(UUID trattaid, UUID mezzoId){
         TypedQuery<Long> query = entityManager.createQuery(
-                "SELECT SUM(FUNCTION('TIMESTAMPDIFF', MINUTE, p.dataPartenza, p.dataArrivo)) FROM Percorrenza p WHERE p.tratta.id = :trattaId",
+                "SELECT SUM(FUNCTION('TIMESTAMPDIFF', MINUTE, p.dataPartenza, p.dataArrivo)) FROM Percorrenza p WHERE p.tratta.id = :trattaId AND p.mezzo.id = :mezzoId",
                 Long.class
         );
         query.setParameter("trattaId", trattaid);
+        query.setParameter("mezzoId", mezzoId);
         return query.getSingleResult();
     }
 }
