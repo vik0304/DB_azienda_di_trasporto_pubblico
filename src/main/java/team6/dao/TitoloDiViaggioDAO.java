@@ -119,8 +119,35 @@ public class TitoloDiViaggioDAO {
     }
 
     public long titoliByVenditore (Venditore venditore){
-        TypedQuery<TitoloDiViaggio> query = entityManager.createQuery("SELECT t FROM TitoliDiViaggio t WHERE t.venditore = :venditore", TitoloDiViaggio.class);
+        TypedQuery<TitoloDiViaggio> query = entityManager.createQuery("SELECT t FROM TitoloDiViaggio t WHERE t.venditore = :venditore", TitoloDiViaggio.class);
         query.setParameter("venditore", venditore);
         return query.getResultList().size();
+    }
+
+    public void trovaBigliettiPerData(Scanner scanner) {
+        System.out.println("Inserisci la data per cui vuoi cercare i biglietti (formato YYYY-MM-DD):");
+        String dataInput = scanner.nextLine();
+        try {
+            LocalDate dataRicerca = LocalDate.parse(dataInput);
+            TypedQuery<Biglietto> query = entityManager.createQuery(
+                    "SELECT b FROM Biglietto b WHERE b.dataAcquisto = :dataRicerca",
+                    Biglietto.class
+            );
+            query.setParameter("dataRicerca", dataRicerca);
+            List<Biglietto> biglietti = query.getResultList();
+
+            if (biglietti.isEmpty()) {
+                System.out.println("Nessun biglietto trovato per la data " + dataRicerca);
+            } else {
+                System.out.println("Biglietti trovati per la data " + dataRicerca + ":");
+                biglietti.forEach(biglietto -> {
+                    System.out.println("- ID Biglietto: " + biglietto.getId());
+                });
+            }
+        } catch (java.time.format.DateTimeParseException e) {
+            System.err.println("Formato data non valido. Usa il formato YYYY-MM-DD.");
+        } catch (Exception e) {
+            System.err.println("Si è verificato un errore durante la ricerca: " + e.getMessage());
+        }
     }
 }
