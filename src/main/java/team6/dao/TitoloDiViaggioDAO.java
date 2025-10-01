@@ -2,6 +2,7 @@ package team6.dao;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import team6.entities.*;
 import team6.exeptions.NotFoundException;
@@ -122,5 +123,13 @@ public class TitoloDiViaggioDAO {
         TypedQuery<TitoloDiViaggio> query = entityManager.createQuery("SELECT t FROM TitoliDiViaggio t WHERE t.venditore = :venditore", TitoloDiViaggio.class);
         query.setParameter("venditore", venditore);
         return query.getResultList().size();
+    }
+
+    public void annullaBiglietto(UUID idBiglietto){
+        Query query = entityManager.createQuery(
+                "UPDATE Biglietto b SET b.valido = false WHERE b.id = :id"
+        );
+        query.setParameter("id", idBiglietto);
+        query.executeUpdate();
     }
 }
