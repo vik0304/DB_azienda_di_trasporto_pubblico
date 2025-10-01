@@ -2,9 +2,13 @@ package team6.dao;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.TypedQuery;
 import team6.entities.Tessera;
+import team6.entities.Utente;
 import team6.exeptions.NotFoundException;
 
+import java.time.LocalDate;
+import java.util.Scanner;
 import java.util.UUID;
 
 public class TesseraDAO {
