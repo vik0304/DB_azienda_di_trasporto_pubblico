@@ -9,7 +9,8 @@ import java.util.UUID;
 @Entity
 public class Utente {
     @Id
-    private UUID codice_fiscale;
+    @Column(name = "codice_fiscale")
+    private UUID codiceFiscale;
 
     @Column(name = "nome")
     private String nome;
