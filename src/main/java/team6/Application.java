@@ -61,14 +61,15 @@ public class Application {
         int option;
         boolean isWorking = true;
         while (isWorking) {
-            System.out.println("1- Aggiungi un nuovo veicolo.");
-            System.out.println("2- Verifica biglietti venduti in un periodo");
-            System.out.println("3- Crea una nuova tessera");
+            System.out.println("1- Menu inserimento dati");
+            System.out.println("2- ");
+            System.out.println("3- ");
             System.out.println("4- ");
             System.out.println("5- ");
             System.out.println("6- ");
             System.out.println("7- ");
             System.out.println("8- ");
+            System.out.println("9- ");
             System.out.println("0-  ");
             try {
                 option = Integer.parseInt(s.nextLine());
@@ -77,13 +78,13 @@ public class Application {
                         isWorking = false;
                         break;
                     case 1:
-                        vd.creaVeicoloDaInput(s);
+
                         break;
                     case 2:
-                        tdv.trovaBigliettiPerData(s);
+
                         break;
                     case 3:
-                        td.creaTesseraDaInput(s);
+
                         break;
                     case 4:
 
@@ -108,7 +109,71 @@ public class Application {
                 System.out.println("Errore: devi inserire un numero intero positivo.");
             }
         }
-    }public static void menuUser() {
+    }
+
+    public static void adminCreationMenu(){
+        System.out.println("Seleziona l'elemento che vuoi inserire");
+        int option;
+        boolean isWorking = true;
+        while (isWorking) {
+            System.out.println("1- Biglietto");
+            System.out.println("2- Abbonamento");
+            System.out.println("3- Utente");
+            System.out.println("4- Tessera");
+            System.out.println("5- Veicolo");
+            System.out.println("6- Manutenzione");
+            System.out.println("7- Tratta");
+            System.out.println("8- Percorrenza");
+            System.out.println("9- Rivenditore autorizzato");
+            System.out.println("10- Distributore automatico");
+            System.out.println("0-  Torna indietro");
+            try {
+                option = Integer.parseInt(s.nextLine());
+                switch (option) {
+                    case 0:
+                        isWorking = false;
+                        break;
+                    case 1:
+
+                        break;
+                    case 2:
+
+                        break;
+                    case 3:
+
+                        break;
+                    case 4:
+
+                        break;
+                    case 5:
+
+                        break;
+                    case 6:
+
+                        break;
+                    case 7:
+
+                        break;
+                    case 8:
+
+                        break;
+                    case 9:
+
+                        break;
+                    case 10:
+
+                        break;
+                    default:
+                        isWorking = true;
+                        break;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Errore: devi inserire un numero intero positivo.");
+            }
+        }
+    }
+
+    public static void menuUser() {
         System.out.println("Benvenuto, seleziona l'operazione che vuoi eseguire oppure 0 per uscire.");
         int option;
         boolean isWorking = true;
