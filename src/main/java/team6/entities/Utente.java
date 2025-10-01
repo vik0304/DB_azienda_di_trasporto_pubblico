@@ -20,15 +20,19 @@ public class Utente {
     @Column(name = "data_di_nascita")
     private LocalDate dataDiNascita;
 
+    @Enumerated(EnumType.STRING)
+    private TipoUtente tipoUtente;
+
     @OneToMany(mappedBy = "idUtente")
     private List<Tessera> tessere;
 
     // LISTA COSTRUTTORE
-    public Utente(String nome, String cognome, LocalDate dataDiNascita, List<Tessera> tessere){
+    public Utente(String nome, String cognome, LocalDate dataDiNascita, List<Tessera> tessere, TipoUtente tipoUtente){
         this.nome = nome;
         this.cognome = cognome;
         this.dataDiNascita =  dataDiNascita;
         this.tessere = tessere;
+        this.tipoUtente = tipoUtente;
     }
 
     // COSTRUTTORE VUOTO PER JPA
