@@ -41,6 +41,19 @@ public class TitoloDiViaggioDAO {
         transaction.commit();
     }
 
+    public void elimina(Scanner scanner, TitoloDiViaggioDAO titDao){
+        System.out.println("Inserisci l'ID del titolo di viaggio da eliminare");
+        String iDInput = scanner.nextLine();
+        try {
+            UUID id = UUID.fromString(iDInput);
+            titDao.findAndDelete(id);
+        } catch (IllegalArgumentException e){
+            System.out.println("ID non valido");
+        } catch (NotFoundException e){
+            System.out.println("Titolo di viaggio non trovata");
+        }
+    }
+
     public void creaTitoloDiViaggioDaInput(Scanner scanner) {
         System.out.println(" tipo di titolo di viaggio ");
         System.out.println("1. Biglietto");
