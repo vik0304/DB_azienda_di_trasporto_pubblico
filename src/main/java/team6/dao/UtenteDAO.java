@@ -7,6 +7,7 @@ import jakarta.persistence.TypedQuery;
 import team6.entities.Utente;
 import team6.exeptions.NotFoundException;
 
+import java.util.Scanner;
 import java.util.UUID;
 
 
@@ -53,5 +54,18 @@ public class UtenteDAO {
         TypedQuery<String> query = entityManager.createQuery("SELECT u.tipoUtente FROM Utente u WHERE u.codiceFiscale = :id", String.class);
         query.setParameter("id", id);
         return query.getSingleResult();
+    }
+
+    public void elimina(Scanner scanner, UtenteDAO uDao){
+        System.out.println("Inserisci l'ID della utente da eliminare");
+        String iDInput = scanner.nextLine();
+        try {
+            UUID id = UUID.fromString(iDInput);
+            uDao.findAndDelete(id);
+        } catch (IllegalArgumentException e){
+            System.out.println("ID non valido");
+        } catch (NotFoundException e){
+            System.out.println("Utente non trovato");
+        }
     }
 }

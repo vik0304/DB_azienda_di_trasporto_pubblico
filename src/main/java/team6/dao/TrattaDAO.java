@@ -7,6 +7,7 @@ import team6.exeptions.NotFoundException;
 
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Scanner;
 import java.util.UUID;
 
 public class TrattaDAO {
@@ -35,6 +36,19 @@ public class TrattaDAO {
         transaction.begin();
         entityManager.remove(found);
         transaction.commit();
+    }
+
+    public void elimina(Scanner scanner, TrattaDAO tDao){
+        System.out.println("Inserisci l'ID della tratta da eliminare");
+        String iDInput = scanner.nextLine();
+        try {
+            UUID id = UUID.fromString(iDInput);
+            tDao.findAndDelete(id);
+        } catch (IllegalArgumentException e){
+            System.out.println("ID non valido");
+        } catch (NotFoundException e){
+            System.out.println("Tratta non trovata");
+        }
     }
 
     public List<Tratta> findAll() { return null; }

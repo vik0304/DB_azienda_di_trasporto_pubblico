@@ -51,6 +51,19 @@ public class TesseraDAO {
         System.out.println("La tessera " + found.getId() + " è stata rimossa");
     }
 
+    public void elimina(Scanner scanner, TesseraDAO tessDao){
+        System.out.println("Inserisci l'ID della tessera da eliminare");
+        String iDInput = scanner.nextLine();
+        try {
+            UUID id = UUID.fromString(iDInput);
+            tessDao.findAndDelete(id);
+        } catch (IllegalArgumentException e){
+            System.out.println("ID non valido");
+        } catch (NotFoundException e){
+            System.out.println("Tessera non trovata");
+        }
+    }
+
     public Abbonamento abbonamentiAttiviPerTessera(UUID idTessera){
         TypedQuery<Abbonamento> query = entityManager.createQuery("SELECT a FROM Abbonamento a WHERE a.tessera.id = :tesseraId AND a.dataScadenza > :oggi", Abbonamento.class);
         query.setParameter("tesseraId", idTessera);

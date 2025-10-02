@@ -12,6 +12,7 @@ import team6.exeptions.NotFoundException;
 import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Scanner;
 import java.util.UUID;
 
 public class PercorrenzaDAO {
@@ -40,6 +41,19 @@ public class PercorrenzaDAO {
         transaction.begin();
         entityManager.remove(found);
         transaction.commit();
+    }
+
+    public void elimina(Scanner scanner, PercorrenzaDAO pDao){
+        System.out.println("Inserisci l'ID della percorrenza da eliminare");
+        String iDInput = scanner.nextLine();
+        try {
+            UUID id = UUID.fromString(iDInput);
+            pDao.findAndDelete(id);
+        } catch (IllegalArgumentException e){
+            System.out.println("ID non valido");
+        } catch (NotFoundException e){
+            System.out.println("Percorrenza non trovata");
+        }
     }
 
     public long numPercorrenza(UUID trattaId, UUID mezzoId){

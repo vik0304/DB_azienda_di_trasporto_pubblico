@@ -3,10 +3,7 @@ package team6;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
-import team6.dao.TesseraDAO;
-import team6.dao.TitoloDiViaggioDAO;
-import team6.dao.UtenteDAO;
-import team6.dao.VeicoloDAO;
+import team6.dao.*;
 
 import java.util.Scanner;
 import java.util.UUID;
@@ -23,6 +20,7 @@ public class Application {
         UtenteDAO ud = new UtenteDAO(em);
         VeicoloDAO vd = new VeicoloDAO(em);
         TesseraDAO td = new TesseraDAO(em);
+        TrattaDAO traD = new TrattaDAO(em);
 
         mainMenu(ud, vd, tdv, td);
 
@@ -226,4 +224,6 @@ public class Application {
             }
         }
     }
+
+
 }

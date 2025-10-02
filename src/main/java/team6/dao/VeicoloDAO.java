@@ -7,6 +7,7 @@ import team6.exeptions.NotFoundException;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.UUID;
 
 public class VeicoloDAO {
     private final EntityManager entityManager;
@@ -34,6 +35,18 @@ public class VeicoloDAO {
         transaction.begin();
         entityManager.remove(found);
         transaction.commit();
+    }
+
+    public void elimina(Scanner scanner, VeicoloDAO vDao){
+        System.out.println("Inserisci l'ID del veicolo da eliminare");
+        try {
+            long id = scanner.nextLong();
+            vDao.findAndDelete(id);
+        } catch (IllegalArgumentException e){
+            System.out.println("ID non valido");
+        } catch (NotFoundException e){
+            System.out.println("Veicolo non trovato");
+        }
     }
 
     public void creaVeicoloDaInput(Scanner scanner) {

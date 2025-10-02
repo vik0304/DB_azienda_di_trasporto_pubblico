@@ -6,6 +6,7 @@ import team6.entities.Manutenzione;
 import team6.entities.Utente;
 import team6.exeptions.NotFoundException;
 
+import java.util.Scanner;
 import java.util.UUID;
 
 public class ManutenzioneDAO {
@@ -44,5 +45,18 @@ public class ManutenzioneDAO {
         entityManager.remove(found);
         transaction.commit();
         System.out.println("La manutenzione " + found.getId() + " è stata rimossa");
+    }
+
+    public void elimina(Scanner scanner, ManutenzioneDAO mDao){
+        System.out.println("Inserisci l'ID della manutenzione da eliminare");
+        String iDInput = scanner.nextLine();
+        try {
+            UUID id = UUID.fromString(iDInput);
+            mDao.findAndDelete(id);
+        } catch (IllegalArgumentException e){
+            System.out.println("ID non valido");
+        } catch (NotFoundException e){
+            System.out.println("Manutenzione non trovata");
+        }
     }
 }

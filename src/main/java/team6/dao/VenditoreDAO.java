@@ -6,6 +6,7 @@ import team6.entities.TitoloDiViaggio;
 import team6.entities.Venditore;
 import team6.exeptions.NotFoundException;
 
+import java.util.Scanner;
 import java.util.UUID;
 
 public class VenditoreDAO {
@@ -34,5 +35,18 @@ public class VenditoreDAO {
         transaction.begin();
         entityManager.remove(found);
         transaction.commit();
+    }
+
+    public void elimina(Scanner scanner, VenditoreDAO vendDao){
+        System.out.println("Inserisci l'ID del venditore da eliminare");
+        String iDInput = scanner.nextLine();
+        try {
+            UUID id = UUID.fromString(iDInput);
+            vendDao.findAndDelete(id);
+        } catch (IllegalArgumentException e){
+            System.out.println("ID non valido");
+        } catch (NotFoundException e){
+            System.out.println("Venditore non trovato");
+        }
     }
 }
