@@ -68,4 +68,22 @@ public class UtenteDAO {
             System.out.println("Utente non trovato");
         }
     }
+
+    public void cercaUtentePerIdDaInput(java.util.Scanner scanner) {
+        System.out.println("Inserisci l'ID (UUID) dell'utente:");
+        try {
+            UUID utenteId = UUID.fromString(scanner.nextLine());
+            Utente utente = findById(utenteId);
+            System.out.println("Utente trovato:");
+            System.out.println("- Codice Fiscale: " + utente.getCodice_fiscale());
+            System.out.println("- Nome: " + utente.getNome());
+            System.out.println("- Cognome: " + utente.getCognome());
+            System.out.println("- Data di nascita: " + utente.getDataDiNascita());
+            System.out.println("- Tipo: " + utente.getTipoUtente());
+        } catch (IllegalArgumentException e) {
+            System.err.println("ID utente non valido.");
+        } catch (NotFoundException e) {
+            System.err.println("Utente non trovato.");
+        }
+    }
 }
