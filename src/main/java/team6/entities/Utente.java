@@ -68,4 +68,7 @@ public class Utente {
         this.dataDiNascita = dataDiNascita;
     }
 
+    public TipoUtente getTipoUtente() {
+        return tipoUtente;
+    }
 }
