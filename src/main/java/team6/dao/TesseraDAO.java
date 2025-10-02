@@ -80,4 +80,39 @@ public class TesseraDAO {
             System.err.println("ID utente non valido. Assicurati di inserire un UUID corretto.");
         }
     }
+
+    public void cercaTesseraPerIdDaInput(Scanner scanner) {
+        System.out.println("Inserisci l'ID (UUID) della tessera:");
+        try {
+            UUID tesseraId = UUID.fromString(scanner.nextLine());
+            Tessera tessera = findById(tesseraId);
+            System.out.println("Tessera trovata:");
+            System.out.println("- ID: " + tessera.getId());
+            System.out.println("- Data emissione: " + tessera.getDataDiEmissione());
+            System.out.println("- Data scadenza: " + tessera.getDataScadenza());
+            System.out.println("- Proprietario: " + tessera.getIdUtente().getNome() + " " + tessera.getIdUtente().getCognome());
+        } catch (IllegalArgumentException e) {
+            System.err.println("ID tessera non valido.");
+        } catch (NotFoundException e) {
+            System.err.println("Tessera non trovata.");
+        }
+    }
+
+    public void cercaAbbonamentiAttiviPerTesseraDaInput(Scanner scanner) {
+        System.out.println("Inserisci l'ID della tessera:");
+        try {
+            UUID tesseraId = UUID.fromString(scanner.nextLine());
+            team6.entities.Abbonamento abbonamento = abbonamentiAttiviPerTessera(tesseraId);
+            if (abbonamento != null) {
+                System.out.println("Abbonamento attivo trovato:");
+                System.out.println("- ID: " + abbonamento.getId());
+                System.out.println("- Tipo: " + abbonamento.getTipoAbbonamento());
+                System.out.println("- Data scadenza: " + abbonamento.getDataScadenza());
+            }
+        } catch (IllegalArgumentException e) {
+            System.err.println("ID tessera non valido.");
+        } catch (Exception e) {
+            System.out.println("Nessun abbonamento attivo trovato per questa tessera.");
+        }
+    }
 }

@@ -79,4 +79,12 @@ public class Utente {
     public void setTessere(List<Tessera> tessere) {
         this.tessere = tessere;
     }
+
+    public TipoUtente getTipoUtente() {
+        return tipoUtente;
+    }
+
+    public void setTipoUtente(TipoUtente tipoUtente) {
+        this.tipoUtente = tipoUtente;
+    }
 }

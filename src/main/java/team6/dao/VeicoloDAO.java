@@ -55,6 +55,23 @@ public class VeicoloDAO {
         System.out.println("Nuovo veicolo creato con ID: " + nuovoVeicolo.getId());
     }
 
+    public void cercaVeicoloPerIdDaInput(Scanner scanner) {
+        System.out.println("Inserisci l'ID del veicolo:");
+        try {
+            long veicoloId = Long.parseLong(scanner.nextLine());
+            Veicolo veicolo = findById(veicoloId);
+            System.out.println("Veicolo trovato:");
+            System.out.println("- ID: " + veicolo.getId());
+            System.out.println("- Tipo mezzo: " + veicolo.tipoMezzo);
+            System.out.println("- Capienza: " + veicolo.capienza);
+            System.out.println("- In manutenzione: " + (veicolo.inManutenzione ? "Sì" : "No"));
+        } catch (NumberFormatException e) {
+            System.err.println("ID veicolo non valido.");
+        } catch (team6.exeptions.NotFoundException e) {
+            System.err.println("Veicolo non trovato.");
+        }
+    }
+
     public List<Veicolo> findAll() { return null; }
 
     public void update(Veicolo veicolo) {}
