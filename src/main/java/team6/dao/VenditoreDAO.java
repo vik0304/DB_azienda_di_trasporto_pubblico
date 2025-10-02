@@ -52,10 +52,12 @@ public class VenditoreDAO {
                     System.out.println("Il distributore è al momento attivo? (true/false)");
                     boolean statoAttivazione = Boolean.parseBoolean(s.nextLine());
                     DistributoreAutomatico distributoreAutomatico = new DistributoreAutomatico(posizione, statoAttivazione);
+                    save(distributoreAutomatico);
                 } else {
                     System.out.println("Inserisci il nome del rivenditore autorizzato:");
                     String nome = s.nextLine();
                     RivenditoreAutorizzato rivenditoreAutorizzato = new RivenditoreAutorizzato(posizione, nome);
+                    save(rivenditoreAutorizzato);
                 }
                 System.out.println("Venditore salvato con successo! Verrai riportato al menu.");
             } else {
