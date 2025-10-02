@@ -51,19 +51,6 @@ public class TrattaDAO {
         }
     }
 
-    public List<Tratta> findAll() { return null; }
-
-    public void update(Tratta tratta) {}
-
-    public void delete(String id) {}
-
-    public List<Tratta> findByPartenza(String partenza) { return null; }
-
-    public List<Tratta> findByCapolinea(String capolinea) { return null; }
-
-    public List<Tratta> findByPartenzaAndCapolinea(String partenza, String capolinea) { return null; }
-
-    public List<Tratta> findByDurataPrevista(BigInteger durataPrevista) { return null; }
     public void trattaCreate(Scanner s){
         System.out.println("Inserisci il punto di partenza della tratta:");
         String partenza = s.nextLine();
