@@ -60,7 +60,7 @@ public class Application {
         int option;
         boolean isWorking = true;
         while (isWorking) {
-            System.out.println("=== MENU ADMIN ===");
+            System.out.println(" MENU ADMIN ");
             System.out.println("1- Menu inserimento dati");
             System.out.println("2- Menu ricerca");
             System.out.println("3- Vidima biglietto");
@@ -86,9 +86,9 @@ public class Application {
                         tdv.vidimaBigliettoDaInput(s);
                         break;
                     case 4:
-                        System.out.println("--- Numero Percorrenze ---");
+                        System.out.println(" Numero Percorrenze ");
                         pd.cercaNumPercorrenzaDaInput(s);
-                        System.out.println("\n--- Tempo Effettivo Tratta ---");
+                        System.out.println("\n Tempo Effettivo Tratta ");
                         pd.cercaTempoEffettivoTrattaDaInput(s);
                         break;
                     case 5:
