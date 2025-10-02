@@ -3,10 +3,7 @@ package team6;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
-import team6.dao.TesseraDAO;
-import team6.dao.TitoloDiViaggioDAO;
-import team6.dao.UtenteDAO;
-import team6.dao.VeicoloDAO;
+import team6.dao.*;
 
 import java.util.Scanner;
 import java.util.UUID;
@@ -23,16 +20,17 @@ public class Application {
         UtenteDAO ud = new UtenteDAO(em);
         VeicoloDAO vd = new VeicoloDAO(em);
         TesseraDAO td = new TesseraDAO(em);
-        team6.dao.PercorrenzaDAO pd = new team6.dao.PercorrenzaDAO(em);
+        TrattaDAO traD = new TrattaDAO(em);
+        PercorrenzaDAO pd = new PercorrenzaDAO(em);
 
-        mainMenu(ud, vd, tdv, td, pd);
+        mainMenu(ud, vd, tdv, td, traD, pd);
 
         s.close();
         em.close();
         emf.close();
     }
 
-    public static void mainMenu(UtenteDAO ud, VeicoloDAO vd, TitoloDiViaggioDAO tdv, TesseraDAO td, team6.dao.PercorrenzaDAO pd) {
+    public static void mainMenu(UtenteDAO ud, VeicoloDAO vd, TitoloDiViaggioDAO tdv, TesseraDAO td, TrattaDAO traD, PercorrenzaDAO pd) {
         boolean attivo = true;
         while (attivo) {
             System.out.println("Benvenuto, inserisci il tuo ID per iniziare ad utilizzare software oppure exit per uscire.");
@@ -46,7 +44,7 @@ public class Application {
                     String userType = ud.userType(utenteId);
                     System.out.println("Avvio applicazione . . .");
                     if (userType.equals("ADMIN")) {
-                        menuAdmin(vd, tdv, td, ud, pd);
+                        menuAdmin(vd, tdv, td, traD, ud, pd);
                     } else if (userType.equals("USER")) {
                         menuUser();
                     }
@@ -57,12 +55,12 @@ public class Application {
         }
     }
 
-    public static void menuAdmin(VeicoloDAO vd, TitoloDiViaggioDAO tdv, TesseraDAO td, UtenteDAO ud, team6.dao.PercorrenzaDAO pd) {
+    public static void menuAdmin(VeicoloDAO vd, TitoloDiViaggioDAO tdv, TesseraDAO td, TrattaDAO traD, UtenteDAO ud, PercorrenzaDAO pd) {
         System.out.println("Benvenuto admin, seleziona l'operazione che vuoi eseguire oppure 0 per uscire.");
         int option;
         boolean isWorking = true;
         while (isWorking) {
-            System.out.println(" MENU ADMIN ");
+            System.out.println("=== MENU ADMIN ===");
             System.out.println("1- Menu inserimento dati");
             System.out.println("2- Menu ricerca");
             System.out.println("3- Vidima biglietto");
@@ -79,7 +77,7 @@ public class Application {
                         isWorking = false;
                         break;
                     case 1:
-
+                        adminCreationMenu(vd, traD);
                         break;
                     case 2:
                         menuAdminCerca(tdv, vd, td, ud);
@@ -88,9 +86,9 @@ public class Application {
                         tdv.vidimaBigliettoDaInput(s);
                         break;
                     case 4:
-                        System.out.println(" Numero Percorrenze ");
+                        System.out.println("--- Numero Percorrenze ---");
                         pd.cercaNumPercorrenzaDaInput(s);
-                        System.out.println("\n Tempo Effettivo Tratta ");
+                        System.out.println("\n--- Tempo Effettivo Tratta ---");
                         pd.cercaTempoEffettivoTrattaDaInput(s);
                         break;
                     case 5:
@@ -115,7 +113,7 @@ public class Application {
         }
     }
 
-    public static void adminCreationMenu(){
+    public static void adminCreationMenu(VeicoloDAO vd, TrattaDAO traD){
         System.out.println("Seleziona l'elemento che vuoi inserire");
         int option;
         boolean isWorking = true;
