@@ -41,12 +41,12 @@ public class PercorrenzaDAO {
         transaction.commit();
     }
 
-    public void elimina(Scanner scanner, PercorrenzaDAO pDao){
+    public void elimina(Scanner scanner){
         System.out.println("Inserisci l'ID della percorrenza da eliminare");
         String iDInput = scanner.nextLine();
         try {
             UUID id = UUID.fromString(iDInput);
-            pDao.findAndDelete(id);
+            findAndDelete(id);
         } catch (IllegalArgumentException e){
             System.out.println("ID non valido");
         } catch (NotFoundException e){
