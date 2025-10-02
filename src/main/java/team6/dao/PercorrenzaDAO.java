@@ -41,22 +41,35 @@ public class PercorrenzaDAO {
         transaction.commit();
     }
 
-    public long numPercorrenza(UUID trattaId, UUID mezzoId){
+    public void elimina(Scanner scanner, PercorrenzaDAO pDao){
+        System.out.println("Inserisci l'ID della percorrenza da eliminare");
+        String iDInput = scanner.nextLine();
+        try {
+            UUID id = UUID.fromString(iDInput);
+            pDao.findAndDelete(id);
+        } catch (IllegalArgumentException e){
+            System.out.println("ID non valido");
+        } catch (NotFoundException e){
+            System.out.println("Percorrenza non trovata");
+        }
+    }
+
+    public long numPercorrenza(UUID trattaId, UUID veicoloId){
         TypedQuery<Long> query = entityManager.createQuery(
-                "SELECT COUNT(p) FROM Percorrenza p WHERE p.tratta.id = :trattaId AND p.mezzo.id = :mezzoId", Long.class
+                "SELECT COUNT(p) FROM Percorrenza p WHERE p.tratta.id = :trattaId AND p.veicolo.id = :veicoloId", Long.class
         );
         query.setParameter("trattaId", trattaId);
-        query.setParameter("mezzoId", mezzoId);
+        query.setParameter("veicoloId", veicoloId);
         return query.getSingleResult();
     }
 
-    public long tempoEffettivoTratta(UUID trattaid, UUID mezzoId){
+    public Long tempoEffettivoTratta(UUID trattaId, UUID veicoloId){
         TypedQuery<Long> query = entityManager.createQuery(
-                "SELECT SUM(FUNCTION('TIMESTAMPDIFF', MINUTE, p.dataPartenza, p.dataArrivo)) FROM Percorrenza p WHERE p.tratta.id = :trattaId AND p.mezzo.id = :mezzoId",
+                "SELECT SUM(p.durataCorsa) FROM Percorrenza p WHERE p.tratta.id = :trattaId AND p.veicolo.id = :veicoloId",
                 Long.class
         );
-        query.setParameter("trattaId", trattaid);
-        query.setParameter("mezzoId", mezzoId);
+        query.setParameter("trattaId", trattaId);
+        query.setParameter("veicoloId", veicoloId);
         return query.getSingleResult();
     }
 
@@ -80,6 +93,42 @@ public class PercorrenzaDAO {
             System.err.println("Formato data non valido. Usa il formato YYYY-MM-DD. Verra riportato al menu.");
         } catch (Exception e) {
             System.err.println("Si è verificato un errore durante la ricerca: " + e.getMessage() + " verrai riportato al menu.");
+        }
+    }
+
+    public void cercaNumPercorrenzaDaInput(java.util.Scanner scanner) {
+        System.out.println("Inserisci l'ID (UUID) della tratta:");
+        try {
+            UUID trattaId = UUID.fromString(scanner.nextLine());
+            System.out.println("Inserisci l'ID (UUID) del veicolo:");
+            UUID veicoloId = UUID.fromString(scanner.nextLine());
+
+            long numPercorrenze = numPercorrenza(trattaId, veicoloId);
+            System.out.println("Numero di percorrenze della tratta " + trattaId + " effettuate dal veicolo " + veicoloId + ": " + numPercorrenze);
+        } catch (IllegalArgumentException e) {
+            System.err.println("ID non valido. Assicurati di inserire UUID corretti.");
+        } catch (Exception e) {
+            System.err.println("Errore durante la ricerca: " + e.getMessage());
+        }
+    }
+
+    public void cercaTempoEffettivoTrattaDaInput(java.util.Scanner scanner) {
+        System.out.println("Inserisci l'ID (UUID) della tratta:");
+        try {
+            UUID trattaId = UUID.fromString(scanner.nextLine());
+            System.out.println("Inserisci l'ID (UUID) del veicolo:");
+            UUID veicoloId = UUID.fromString(scanner.nextLine());
+
+            Long tempoTotale = tempoEffettivoTratta(trattaId, veicoloId);
+            if (tempoTotale != null) {
+                System.out.println("Tempo effettivo totale per la tratta " + trattaId + " con veicolo " + veicoloId + ": " + tempoTotale + " minuti");
+            } else {
+                System.out.println("Nessuna percorrenza trovata per questa combinazione tratta-veicolo.");
+            }
+        } catch (IllegalArgumentException e) {
+            System.err.println("ID non valido. Assicurati di inserire UUID corretti.");
+        } catch (Exception e) {
+            System.err.println("Errore durante la ricerca: " + e.getMessage());
         }
     }
 }

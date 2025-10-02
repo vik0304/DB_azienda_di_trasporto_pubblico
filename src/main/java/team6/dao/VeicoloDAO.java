@@ -7,6 +7,7 @@ import team6.exeptions.NotFoundException;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.UUID;
 
 public class VeicoloDAO {
     private final EntityManager entityManager;
@@ -36,6 +37,18 @@ public class VeicoloDAO {
         transaction.commit();
     }
 
+    public void elimina(Scanner scanner, VeicoloDAO vDao){
+        System.out.println("Inserisci l'ID del veicolo da eliminare");
+        try {
+            long id = scanner.nextLong();
+            vDao.findAndDelete(id);
+        } catch (IllegalArgumentException e){
+            System.out.println("ID non valido");
+        } catch (NotFoundException e){
+            System.out.println("Veicolo non trovato");
+        }
+    }
+
     public void creaVeicoloDaInput(Scanner scanner) {
         System.out.println(" tipo di mezzo (es. autobus, tram):");
         String tipoMezzo = scanner.nextLine();
@@ -53,6 +66,23 @@ public class VeicoloDAO {
 
         save(nuovoVeicolo);
         System.out.println("Nuovo veicolo creato con ID: " + nuovoVeicolo.getId());
+    }
+
+    public void cercaVeicoloPerIdDaInput(Scanner scanner) {
+        System.out.println("Inserisci l'ID del veicolo:");
+        try {
+            long veicoloId = Long.parseLong(scanner.nextLine());
+            Veicolo veicolo = findById(veicoloId);
+            System.out.println("Veicolo trovato:");
+            System.out.println("- ID: " + veicolo.getId());
+            System.out.println("- Tipo mezzo: " + veicolo.tipoMezzo);
+            System.out.println("- Capienza: " + veicolo.capienza);
+            System.out.println("- In manutenzione: " + (veicolo.inManutenzione ? "Sì" : "No"));
+        } catch (NumberFormatException e) {
+            System.err.println("ID veicolo non valido.");
+        } catch (team6.exeptions.NotFoundException e) {
+            System.err.println("Veicolo non trovato.");
+        }
     }
 
     public List<Veicolo> findAll() { return null; }

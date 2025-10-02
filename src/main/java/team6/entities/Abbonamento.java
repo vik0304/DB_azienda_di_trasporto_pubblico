@@ -31,31 +31,27 @@ public class Abbonamento extends TitoloDiViaggio{
         this.idTessera = idTessera;
     }
 
-//    public UUID getNumeroTessera() {
-//        return idAbbonamento;
-//    }
-//
-//    public LocalDate getDataAcquisto() {
-//        return dataAcquisto;
-//    }
-//
-//    public void setDataAcquisto(LocalDate dataAcquisto) {
-//        this.dataAcquisto = dataAcquisto;
-//    }
-//
-//    public LocalDate getDataEmissione() {
-//        return dataEmissione;
-//    }
-//
-//    public void setDataEmissione(LocalDate dataEmissione) {
-//        this.dataEmissione = dataEmissione;
-//    }
-//
-//    public Tessera getIdTessera() {
-//        return idTessera;
-//    }
-//
-//    public void setIdTessera(Tessera idTessera) {
-//        this.idTessera = idTessera;
-//    }
+    public TipoAbbonamento getTipoAbbonamento() {
+        return tipoAbbonamento;
+    }
+
+    public void setTipoAbbonamento(TipoAbbonamento tipoAbbonamento) {
+        this.tipoAbbonamento = tipoAbbonamento;
+    }
+
+    public LocalDate getDataScadenza() {
+        return dataScadenza;
+    }
+
+    public void setDataScadenza(LocalDate dataScadenza) {
+        this.dataScadenza = dataScadenza;
+    }
+
+    public Tessera getIdTessera() {
+        return idTessera;
+    }
+
+    public void setIdTessera(Tessera idTessera) {
+        this.idTessera = idTessera;
+    }
 }

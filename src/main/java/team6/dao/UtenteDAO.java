@@ -10,6 +10,7 @@ import team6.exeptions.NotFoundException;
 
 import java.time.LocalDate;
 import java.util.Scanner;
+import java.util.Scanner;
 import java.util.UUID;
 
 
@@ -96,6 +97,37 @@ public class UtenteDAO {
             }
         } catch (NumberFormatException e){
             System.out.println("Errore: devi inserire un numero intero positivo.");
+        }
+    }
+
+    public void elimina(Scanner scanner, UtenteDAO uDao){
+        System.out.println("Inserisci l'ID della utente da eliminare");
+        String iDInput = scanner.nextLine();
+        try {
+            UUID id = UUID.fromString(iDInput);
+            uDao.findAndDelete(id);
+        } catch (IllegalArgumentException e){
+            System.out.println("ID non valido");
+        } catch (NotFoundException e){
+            System.out.println("Utente non trovato");
+        }
+    }
+
+    public void cercaUtentePerIdDaInput(java.util.Scanner scanner) {
+        System.out.println("Inserisci l'ID (UUID) dell'utente:");
+        try {
+            UUID utenteId = UUID.fromString(scanner.nextLine());
+            Utente utente = findById(utenteId);
+            System.out.println("Utente trovato:");
+            System.out.println("- Codice Fiscale: " + utente.getCodice_fiscale());
+            System.out.println("- Nome: " + utente.getNome());
+            System.out.println("- Cognome: " + utente.getCognome());
+            System.out.println("- Data di nascita: " + utente.getDataDiNascita());
+            System.out.println("- Tipo: " + utente.getTipoUtente());
+        } catch (IllegalArgumentException e) {
+            System.err.println("ID utente non valido.");
+        } catch (NotFoundException e) {
+            System.err.println("Utente non trovato.");
         }
     }
 }

@@ -7,6 +7,7 @@ import team6.exeptions.NotFoundException;
 
 import java.time.LocalDate;
 import java.util.Scanner;
+import java.util.Scanner;
 import java.util.UUID;
 
 public class VenditoreDAO {
@@ -62,6 +63,19 @@ public class VenditoreDAO {
             }
         } catch (NumberFormatException e){
             System.out.println("Errore: devi inserire un numero intero positivo.");
+        }
+    }
+
+    public void elimina(Scanner scanner, VenditoreDAO vendDao){
+        System.out.println("Inserisci l'ID del venditore da eliminare");
+        String iDInput = scanner.nextLine();
+        try {
+            UUID id = UUID.fromString(iDInput);
+            vendDao.findAndDelete(id);
+        } catch (IllegalArgumentException e){
+            System.out.println("ID non valido");
+        } catch (NotFoundException e){
+            System.out.println("Venditore non trovato");
         }
     }
 }

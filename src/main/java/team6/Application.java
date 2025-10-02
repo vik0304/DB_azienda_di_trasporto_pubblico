@@ -21,15 +21,16 @@ public class Application {
         VeicoloDAO vd = new VeicoloDAO(em);
         TesseraDAO td = new TesseraDAO(em);
         TrattaDAO traD = new TrattaDAO(em);
+        PercorrenzaDAO pd = new PercorrenzaDAO(em);
 
-        mainMenu(ud, vd, tdv, td, traD);
+        mainMenu(ud, vd, tdv, td, traD, pd);
 
         s.close();
         em.close();
         emf.close();
     }
 
-    public static void mainMenu(UtenteDAO ud, VeicoloDAO vd, TitoloDiViaggioDAO tdv, TesseraDAO td, TrattaDAO traD) {
+    public static void mainMenu(UtenteDAO ud, VeicoloDAO vd, TitoloDiViaggioDAO tdv, TesseraDAO td, TrattaDAO traD, PercorrenzaDAO pd) {
         boolean attivo = true;
         while (attivo) {
             System.out.println("Benvenuto, inserisci il tuo ID per iniziare ad utilizzare software oppure exit per uscire.");
@@ -43,7 +44,7 @@ public class Application {
                     String userType = ud.userType(utenteId);
                     System.out.println("Avvio applicazione . . .");
                     if (userType.equals("ADMIN")) {
-                        menuAdmin(vd, tdv, td, traD);
+                        menuAdmin(vd, tdv, td, traD, ud, pd);
                     } else if (userType.equals("USER")) {
                         menuUser();
                     }
@@ -54,21 +55,21 @@ public class Application {
         }
     }
 
-    public static void menuAdmin(VeicoloDAO vd, TitoloDiViaggioDAO tdv, TesseraDAO td, TrattaDAO traD) {
+    public static void menuAdmin(VeicoloDAO vd, TitoloDiViaggioDAO tdv, TesseraDAO td, TrattaDAO traD, UtenteDAO ud, PercorrenzaDAO pd) {
         System.out.println("Benvenuto admin, seleziona l'operazione che vuoi eseguire oppure 0 per uscire.");
         int option;
         boolean isWorking = true;
         while (isWorking) {
+            System.out.println("=== MENU ADMIN ===");
             System.out.println("1- Menu inserimento dati");
-            System.out.println("2- ");
-            System.out.println("3- ");
-            System.out.println("4- ");
-            System.out.println("5- ");
-            System.out.println("6- ");
-            System.out.println("7- ");
-            System.out.println("8- ");
-            System.out.println("9- ");
-            System.out.println("0-  ");
+            System.out.println("2- Menu ricerca");
+            System.out.println("3- Vidima biglietto");
+            System.out.println("4- Numero percorrenze e tempo effettivo tratta");
+            System.out.println("5- Biglietti e/o abbonamenti per periodo di tempo");
+            System.out.println("6- Biglietti e/o abbonamenti per punto di vendita");
+            System.out.println("7- Biglietti vidimati in un periodo di tempo");
+            System.out.println("8- Biglietti vidimati su un determinato mezzo");
+            System.out.println("0- Esci");
             try {
                 option = Integer.parseInt(s.nextLine());
                 switch (option) {
@@ -79,28 +80,31 @@ public class Application {
                         adminCreationMenu(vd, traD);
                         break;
                     case 2:
-
+                        menuAdminCerca(tdv, vd, td, ud);
                         break;
                     case 3:
-
+                        tdv.vidimaBigliettoDaInput(s);
                         break;
                     case 4:
-
+                        System.out.println("--- Numero Percorrenze ---");
+                        pd.cercaNumPercorrenzaDaInput(s);
+                        System.out.println("\n--- Tempo Effettivo Tratta ---");
+                        pd.cercaTempoEffettivoTrattaDaInput(s);
                         break;
                     case 5:
-
+                        tdv.trovaBigliettiPerData(s);
                         break;
                     case 6:
-
+                        tdv.cercaTitoliPerPuntoVenditaDaInput(s);
                         break;
                     case 7:
-
+                        tdv.cercaBigliettiVidimatiPerPeriodoDaInput(s);
                         break;
                     case 8:
-
+                        tdv.cercaBigliettiVidimatiPerVeicoloDaInput(s);
                         break;
                     default:
-                        isWorking = true;
+                        System.out.println("Opzione non valida.");
                         break;
                 }
             } catch (NumberFormatException e) {
@@ -217,6 +221,58 @@ public class Application {
                         break;
                     default:
                         isWorking = true;
+                        break;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Errore: devi inserire un numero intero positivo.");
+            }
+        }
+    }
+
+
+
+    public static void menuAdminCerca(TitoloDiViaggioDAO tdv, VeicoloDAO vd, TesseraDAO td, UtenteDAO ud) {
+        System.out.println(" MENU CERCA ADMIN ");
+        int option;
+        boolean isWorking = true;
+        while (isWorking) {
+            System.out.println("1- Cerca vendite titoli di viaggio per periodo");
+            System.out.println("2- Cerca biglietti validati per veicolo");
+            System.out.println("3- Cerca biglietti validati per periodo");
+            System.out.println("4- Cerca abbonamenti attivi per tessera");
+            System.out.println("5- Cerca utente per ID");
+            System.out.println("6- Cerca veicolo per ID");
+            System.out.println("7- Cerca tessera per ID");
+            System.out.println("0- Torna indietro");
+            try {
+                option = Integer.parseInt(s.nextLine());
+                switch (option) {
+                    case 0:
+                        isWorking = false;
+                        break;
+                    case 1:
+                        tdv.trovaBigliettiPerData(s);
+                        break;
+                    case 2:
+                        tdv.cercaBigliettiVidimatiPerVeicoloDaInput(s);
+                        break;
+                    case 3:
+                        tdv.cercaBigliettiVidimatiPerPeriodoDaInput(s);
+                        break;
+                    case 4:
+                        td.cercaAbbonamentiAttiviPerTesseraDaInput(s);
+                        break;
+                    case 5:
+                        ud.cercaUtentePerIdDaInput(s);
+                        break;
+                    case 6:
+                        vd.cercaVeicoloPerIdDaInput(s);
+                        break;
+                    case 7:
+                        td.cercaTesseraPerIdDaInput(s);
+                        break;
+                    default:
+                        System.out.println("Opzione non valida.");
                         break;
                 }
             } catch (NumberFormatException e) {
