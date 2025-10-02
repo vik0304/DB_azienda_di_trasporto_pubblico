@@ -46,7 +46,7 @@ public class VeicoloDAO {
         System.out.println("Il mezzo è in manutenzione? (true/false):");
         boolean inManutenzione = Boolean.parseBoolean(scanner.nextLine());
 
-        Veicolo nuovoVeicolo = new Veicolo();
+        Veicolo nuovoVeicolo = new Veicolo(tipoMezzo, capienza, inManutenzione);
         nuovoVeicolo.tipoMezzo = tipoMezzo;
         nuovoVeicolo.capienza = capienza;
         nuovoVeicolo.inManutenzione = inManutenzione;

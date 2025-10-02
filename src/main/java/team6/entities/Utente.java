@@ -24,15 +24,11 @@ public class Utente {
     @Enumerated(EnumType.STRING)
     private TipoUtente tipoUtente;
 
-    @OneToMany(mappedBy = "idUtente")
-    private List<Tessera> tessere;
-
     // LISTA COSTRUTTORE
-    public Utente(String nome, String cognome, LocalDate dataDiNascita, List<Tessera> tessere, TipoUtente tipoUtente){
+    public Utente(String nome, String cognome, LocalDate dataDiNascita, TipoUtente tipoUtente){
         this.nome = nome;
         this.cognome = cognome;
         this.dataDiNascita =  dataDiNascita;
-        this.tessere = tessere;
         this.tipoUtente = tipoUtente;
     }
 
@@ -72,11 +68,4 @@ public class Utente {
         this.dataDiNascita = dataDiNascita;
     }
 
-    public List<Tessera> getTessere() {
-        return tessere;
-    }
-
-    public void setTessere(List<Tessera> tessere) {
-        this.tessere = tessere;
-    }
 }

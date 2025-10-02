@@ -26,8 +26,7 @@ public class Veicolo {
 
     public Veicolo() {}
 
-    public Veicolo(long id, String tipoMezzo, int capienza, boolean inManutenzione) {
-        this.id = id;
+    public Veicolo(String tipoMezzo, int capienza, boolean inManutenzione) {
         this.tipoMezzo = tipoMezzo;
         this.capienza = capienza;
         this.inManutenzione = inManutenzione;

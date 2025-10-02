@@ -19,12 +19,11 @@ public class Tratta {
     public String capolinea;
 
     @Column(name = "durata_prevista")
-    public BigInteger durataPrevista;
+    public int durataPrevista;
 
     public Tratta() {}
 
-    public Tratta(UUID id, String partenza, String capolinea, BigInteger durataPrevista) {
-        this.id = id;
+    public Tratta(String partenza, String capolinea, int durataPrevista) {
         this.partenza = partenza;
         this.capolinea = capolinea;
         this.durataPrevista = durataPrevista;

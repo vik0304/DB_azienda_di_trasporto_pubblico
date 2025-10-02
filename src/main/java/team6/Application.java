@@ -3,10 +3,7 @@ package team6;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
-import team6.dao.TesseraDAO;
-import team6.dao.TitoloDiViaggioDAO;
-import team6.dao.UtenteDAO;
-import team6.dao.VeicoloDAO;
+import team6.dao.*;
 
 import java.util.Scanner;
 import java.util.UUID;
@@ -23,15 +20,16 @@ public class Application {
         UtenteDAO ud = new UtenteDAO(em);
         VeicoloDAO vd = new VeicoloDAO(em);
         TesseraDAO td = new TesseraDAO(em);
+        TrattaDAO traD = new TrattaDAO(em);
 
-        mainMenu(ud, vd, tdv, td);
+        mainMenu(ud, vd, tdv, td, traD);
 
         s.close();
         em.close();
         emf.close();
     }
 
-    public static void mainMenu(UtenteDAO ud, VeicoloDAO vd, TitoloDiViaggioDAO tdv, TesseraDAO td) {
+    public static void mainMenu(UtenteDAO ud, VeicoloDAO vd, TitoloDiViaggioDAO tdv, TesseraDAO td, TrattaDAO traD) {
         boolean attivo = true;
         while (attivo) {
             System.out.println("Benvenuto, inserisci il tuo ID per iniziare ad utilizzare software oppure exit per uscire.");
@@ -45,7 +43,7 @@ public class Application {
                     String userType = ud.userType(utenteId);
                     System.out.println("Avvio applicazione . . .");
                     if (userType.equals("ADMIN")) {
-                        menuAdmin(vd, tdv, td);
+                        menuAdmin(vd, tdv, td, traD);
                     } else if (userType.equals("USER")) {
                         menuUser();
                     }
@@ -56,7 +54,7 @@ public class Application {
         }
     }
 
-    public static void menuAdmin(VeicoloDAO vd, TitoloDiViaggioDAO tdv, TesseraDAO td) {
+    public static void menuAdmin(VeicoloDAO vd, TitoloDiViaggioDAO tdv, TesseraDAO td, TrattaDAO traD) {
         System.out.println("Benvenuto admin, seleziona l'operazione che vuoi eseguire oppure 0 per uscire.");
         int option;
         boolean isWorking = true;
@@ -78,7 +76,7 @@ public class Application {
                         isWorking = false;
                         break;
                     case 1:
-
+                        adminCreationMenu(vd, traD);
                         break;
                     case 2:
 
@@ -111,7 +109,7 @@ public class Application {
         }
     }
 
-    public static void adminCreationMenu(){
+    public static void adminCreationMenu(VeicoloDAO vd, TrattaDAO traD){
         System.out.println("Seleziona l'elemento che vuoi inserire");
         int option;
         boolean isWorking = true;

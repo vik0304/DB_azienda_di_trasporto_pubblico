@@ -41,58 +41,6 @@ public class TitoloDiViaggioDAO {
         transaction.commit();
     }
 
-    public void creaTitoloDiViaggioDaInput(Scanner scanner) {
-        System.out.println(" tipo di titolo di viaggio ");
-        System.out.println("1. Biglietto");
-        System.out.println("2. Abbonamento");
-        String scelta = scanner.nextLine();
-
-        try {
-            System.out.println("Inserisci l'ID (UUID) del venditore:");
-            UUID venditoreId = UUID.fromString(scanner.nextLine());
-            VenditoreDAO venditoreDAO = new VenditoreDAO(this.entityManager);
-            Venditore venditore = venditoreDAO.findById(venditoreId);
-
-            if ("1".equals(scelta)) {
-                Biglietto nuovoBiglietto = new Biglietto(LocalDate.now(), venditore, false);
-                save(nuovoBiglietto);
-                System.out.println("Nuovo biglietto creato con ID: " + nuovoBiglietto.getId());
-            } else if ("2".equals(scelta)) {
-                System.out.println("Inserisci l'ID della tessera:");
-                UUID tesseraId = UUID.fromString(scanner.nextLine());
-                TesseraDAO tesseraDAO = new TesseraDAO(this.entityManager);
-                Tessera tessera = tesseraDAO.findById(tesseraId);
-
-                if (tessera.getDataScadenza().isBefore(LocalDate.now())) {
-                    System.err.println("La tessera è scaduta. ");
-                    return;
-                }
-
-                System.out.println("Scegli il tipo di abbonamento:");
-                System.out.println("1. SETTIMANALE");
-                System.out.println("2. MENSILE");
-                String tipoAbbonamentoScelta = scanner.nextLine();
-                TipoAbbonamento tipoAbbonamento;
-                if ("1".equals(tipoAbbonamentoScelta)) {
-                    tipoAbbonamento = TipoAbbonamento.SETTIMANALE;
-                } else {
-                    tipoAbbonamento = TipoAbbonamento.MENSILE;
-                }
-
-                Abbonamento nuovoAbbonamento = new Abbonamento(tipoAbbonamento, tessera, LocalDate.now(), venditore);
-                save(nuovoAbbonamento);
-                System.out.println("Nuovo abbonamento creato con ID: " + nuovoAbbonamento.getId());
-
-            } else {
-                System.out.println("Scelta non valida.");
-            }
-        } catch (NotFoundException e) {
-            System.err.println("Entità non trovata (Venditore o Tessera). Impossibile procedere.");
-        } catch (IllegalArgumentException e) {
-            System.err.println("ID non valido.");
-        }
-    }
-
     public long trovaBigliettiVidimatiPerMezzo(long idMezzo) {
         TypedQuery<Biglietto> query = entityManager.createQuery(
             "SELECT b FROM Biglietto b WHERE b.validato = true AND b.veicolo.id = :idMezzo",
@@ -169,4 +117,57 @@ public class TitoloDiViaggioDAO {
             System.err.println("Si è verificato un errore durante la ricerca: " + e.getMessage());
         }
     }
+
+    public void creaTitoloDiViaggioDaInput(Scanner scanner) {
+        System.out.println(" tipo di titolo di viaggio ");
+        System.out.println("1. Biglietto");
+        System.out.println("2. Abbonamento");
+        String scelta = scanner.nextLine();
+
+        try {
+            System.out.println("Inserisci l'ID (UUID) del venditore:");
+            UUID venditoreId = UUID.fromString(scanner.nextLine());
+            VenditoreDAO venditoreDAO = new VenditoreDAO(this.entityManager);
+            Venditore venditore = venditoreDAO.findById(venditoreId);
+
+            if ("1".equals(scelta)) {
+                Biglietto nuovoBiglietto = new Biglietto(LocalDate.now(), venditore, false);
+                save(nuovoBiglietto);
+                System.out.println("Nuovo biglietto creato con ID: " + nuovoBiglietto.getId());
+            } else if ("2".equals(scelta)) {
+                System.out.println("Inserisci l'ID della tessera:");
+                UUID tesseraId = UUID.fromString(scanner.nextLine());
+                TesseraDAO tesseraDAO = new TesseraDAO(this.entityManager);
+                Tessera tessera = tesseraDAO.findById(tesseraId);
+
+                if (tessera.getDataScadenza().isBefore(LocalDate.now())) {
+                    System.err.println("La tessera è scaduta. ");
+                    return;
+                }
+
+                System.out.println("Scegli il tipo di abbonamento:");
+                System.out.println("1. SETTIMANALE");
+                System.out.println("2. MENSILE");
+                String tipoAbbonamentoScelta = scanner.nextLine();
+                TipoAbbonamento tipoAbbonamento;
+                if ("1".equals(tipoAbbonamentoScelta)) {
+                    tipoAbbonamento = TipoAbbonamento.SETTIMANALE;
+                } else {
+                    tipoAbbonamento = TipoAbbonamento.MENSILE;
+                }
+
+                Abbonamento nuovoAbbonamento = new Abbonamento(tipoAbbonamento, tessera, LocalDate.now(), venditore);
+                save(nuovoAbbonamento);
+                System.out.println("Nuovo abbonamento creato con ID: " + nuovoAbbonamento.getId());
+
+            } else {
+                System.out.println("Scelta non valida.");
+            }
+        } catch (NotFoundException e) {
+            System.err.println("Entità non trovata (Venditore o Tessera). Impossibile procedere.");
+        } catch (IllegalArgumentException e) {
+            System.err.println("ID non valido.");
+        }
+    }
+
 }

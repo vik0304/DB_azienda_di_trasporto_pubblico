@@ -25,12 +25,11 @@ public class Percorrenza {
     public LocalDate dataPartenza;
 
     @Column(name = "durata_corsa")
-    public BigInteger durataCorsa;
+    public int durataCorsa;
 
     public Percorrenza() {}
 
-    public Percorrenza(UUID id, Veicolo veicolo, Tratta tratta, LocalDate dataPartenza, BigInteger durataCorsa) {
-        this.id = id;
+    public Percorrenza( Veicolo veicolo, Tratta tratta, LocalDate dataPartenza, int durataCorsa) {
         this.veicolo = veicolo;
         this.tratta = tratta;
         this.dataPartenza = dataPartenza;
