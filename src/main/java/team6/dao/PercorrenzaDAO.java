@@ -41,6 +41,8 @@ public class PercorrenzaDAO {
         transaction.commit();
     }
 
+
+
     public void elimina(Scanner scanner){
         System.out.println("Inserisci l'ID della percorrenza da eliminare");
         String iDInput = scanner.nextLine();
@@ -129,6 +131,21 @@ public class PercorrenzaDAO {
             System.err.println("ID non valido. Assicurati di inserire UUID corretti.");
         } catch (Exception e) {
             System.err.println("Errore durante la ricerca: " + e.getMessage());
+        }
+    }
+
+    public void cercaPerPercorrenza(Scanner s){
+        System.out.println("Inserisci l'ID della percorrenza");
+        String iDInput = s.nextLine();
+        try {
+            UUID id = UUID.fromString(iDInput);
+            Percorrenza risultato = findById(id);
+            System.out.println("Ecco la percorrenza richiesta:");
+            System.out.println(risultato);
+        } catch (IllegalArgumentException e){
+            System.out.println("ID non valido");
+        } catch (NotFoundException e){
+            System.out.println("Percorrenza non trovata");
         }
     }
 }
