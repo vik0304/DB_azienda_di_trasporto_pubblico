@@ -5,8 +5,6 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import team6.dao.*;
 import team6.entities.*;
-
-import java.time.LocalDate;
 import java.util.*;
 
 public class Application {

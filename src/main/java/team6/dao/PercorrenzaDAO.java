@@ -65,10 +65,10 @@ public class PercorrenzaDAO {
         return query.getSingleResult();
     }
 
-    public Long tempoEffettivoTratta(UUID trattaId, long veicoloId){
-        TypedQuery<Long> query = entityManager.createQuery(
-                "SELECT SUM(p.durataCorsa) FROM Percorrenza p WHERE p.tratta.id = :trattaId AND p.veicolo.id = :veicoloId",
-                Long.class
+    public Double tempoEffettivoTratta(UUID trattaId, long veicoloId){
+        TypedQuery<Double> query = entityManager.createQuery(
+                "SELECT AVG(p.durataCorsa) FROM Percorrenza p WHERE p.tratta.id = :trattaId AND p.veicolo.id = :veicoloId",
+                Double.class
         );
         query.setParameter("trattaId", trattaId);
         query.setParameter("veicoloId", veicoloId);
@@ -121,7 +121,7 @@ public class PercorrenzaDAO {
             System.out.println("Inserisci l'ID del veicolo:");
             long veicoloId = Long.parseLong(scanner.nextLine());
 
-            Long tempoTotale = tempoEffettivoTratta(trattaId, veicoloId);
+            Double tempoTotale = tempoEffettivoTratta(trattaId, veicoloId);
             if (tempoTotale != null) {
                 System.out.println("Tempo effettivo totale per la tratta " + trattaId + " con veicolo " + veicoloId + ": " + tempoTotale + " minuti");
             } else {
