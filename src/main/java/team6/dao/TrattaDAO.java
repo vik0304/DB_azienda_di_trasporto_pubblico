@@ -86,7 +86,7 @@ public class TrattaDAO {
             System.out.println("Nessuna tratta disponibile.");
         } else {
             for (Tratta tratta : tratte) {
-                System.out.println(tratta);
+                System.out.println("Partenza da " + tratta.getPartenza() + ", capolinea a " + tratta.getCapolinea() + " e con una durata prevista di " + tratta.getDurataPrevista() + " minuti.");
             }
         }
     }

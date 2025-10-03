@@ -25,8 +25,8 @@ public class Application {
         UtenteDAO ud = new UtenteDAO(em);
         VeicoloDAO vd = new VeicoloDAO(em);
         VenditoreDAO venD = new VenditoreDAO(em);
-        Utente u100 = new Utente("Viktor", "Vasileski", LocalDate.of(1998, 4, 3), TipoUtente.ADMIN);
-        ud.save(u100);
+//        Utente u100 = new Utente("Viktor", "Vasileski", LocalDate.of(1998, 4, 3), TipoUtente.ADMIN);
+//        ud.save(u100);
 //        Utente u1  = new Utente("Mario", "Rossi", LocalDate.of(1990, 5, 12), TipoUtente.USER);
 //        Utente u2  = new Utente("Luca", "Bianchi", LocalDate.of(1985, 3, 8), TipoUtente.USER);
 //        Utente u3  = new Utente("Giulia", "Verdi", LocalDate.of(1992, 11, 23), TipoUtente.USER);
@@ -703,15 +703,9 @@ public class Application {
         int option;
         boolean isWorking = true;
         while (isWorking) {
-            System.out.println("1- ");
-            System.out.println("2- Verifica stato abbonamento");
-            System.out.println("3- Visualizza lista tratte disponibili");
-            System.out.println("4- ");
-            System.out.println("5- ");
-            System.out.println("6- ");
-            System.out.println("7- ");
-            System.out.println("8- ");
-            System.out.println("0-  ");
+            System.out.println("1- Verifica stato abbonamento");
+            System.out.println("2- Visualizza lista tratte disponibili");
+            System.out.println("0- Esci");
             try {
                 option = Integer.parseInt(s.nextLine());
                 switch (option) {
@@ -719,28 +713,10 @@ public class Application {
                         isWorking = false;
                         break;
                     case 1:
-
-                        break;
-                    case 2:
                         tdv.verificaStatoAbbonamento(utenteId);
                         break;
-                    case 3:
+                    case 2:
                         traD.mostraListaTratte(utenteId);
-                        break;
-                    case 4:
-
-                        break;
-                    case 5:
-
-                        break;
-                    case 6:
-
-                        break;
-                    case 7:
-
-                        break;
-                    case 8:
-
                         break;
                     default:
                         System.out.println("Opzione non valida.");

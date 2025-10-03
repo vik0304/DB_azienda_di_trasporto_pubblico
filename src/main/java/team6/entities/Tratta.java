@@ -36,4 +36,16 @@ public class Tratta {
     public UUID getId() {
         return id;
     }
+
+    public String getPartenza() {
+        return partenza;
+    }
+
+    public String getCapolinea() {
+        return capolinea;
+    }
+
+    public int getDurataPrevista() {
+        return durataPrevista;
+    }
 }

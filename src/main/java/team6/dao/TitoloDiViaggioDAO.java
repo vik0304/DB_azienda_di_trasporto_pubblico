@@ -228,7 +228,7 @@ public class TitoloDiViaggioDAO {
             } else {
                 long numBiglietti = bigliettiByPeriodo(dataRicercaStart, dataRicercaEnd);
                 long numAbbonamenti = abbonamentiByPeriodo(dataRicercaStart, dataRicercaEnd);
-                System.out.println("Nel periodo selezionato sono stati venduti " + numTitoliDiViaggio + " dei quali " + numBiglietti + " sono biglietti e " + numAbbonamenti + " sono abbonamenti.");
+                System.out.println("Nel periodo selezionato sono stati venduti " + numTitoliDiViaggio + " titoli di viaggio, dei quali " + numBiglietti + " sono biglietti e " + numAbbonamenti + " sono abbonamenti.");
             }
         } catch (java.time.format.DateTimeParseException e) {
             System.err.println("Formato data non valido. Usa il formato YYYY-MM-DD.");

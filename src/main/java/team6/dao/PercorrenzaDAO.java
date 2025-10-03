@@ -76,10 +76,10 @@ public class PercorrenzaDAO {
     }
 
     public void percorrenzaCreate(Scanner s, TrattaDAO traD, VeicoloDAO vd){
-        System.out.println("Inserisci l'id del veicolo in manutenzione");
+        System.out.println("Inserisci l'd del veicolo:");
         long id = Long.parseLong(s.nextLine());
         Veicolo veicolo = vd.findById(id);
-        System.out.println("Inserisci l'id della tratta che svolge il veicolo.");
+        System.out.println("Inserisci l'id della tratta che svolge il veicolo");
         UUID id2 = UUID.fromString((s.nextLine()));
         Tratta tratta = traD.findById(id2);
         System.out.println("Inserisci la data della corsa (formato YYYY-MM-DD):");
