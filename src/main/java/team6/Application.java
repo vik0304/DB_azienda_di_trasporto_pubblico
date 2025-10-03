@@ -12,11 +12,37 @@ import java.util.*;
 public class Application {
     private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("dbtrasporti");
     static Scanner s = new Scanner(System.in);
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_RESET = "\u001B[0m";
+
 
     public static void main(String[] args) {
         EntityManager em = emf.createEntityManager();
-
-        System.out.println("Hello World!");
+        System.out.println(ANSI_BLUE +
+                "          _____                    _____                    _____          \n" +
+                "         /\\    \\                  /\\    \\                  /\\    \\         \n" +
+                "        /::\\    \\                /::\\____\\                /::\\____\\        \n" +
+                "       /::::\\    \\              /::::|   |               /::::|   |        \n" +
+                "      /::::::\\    \\            /:::::|   |              /:::::|   |        \n" +
+                "     /:::/\\:::\\    \\          /::::::|   |             /::::::|   |        \n" +
+                "    /:::/__\\:::\\    \\        /:::/|::|   |            /:::/|::|   |        \n" +
+                "   /::::\\   \\:::\\    \\      /:::/ |::|   |           /:::/ |::|   |        \n" +
+                "  /::::::\\   \\:::\\    \\    /:::/  |::|   | _____    /:::/  |::|___|______  \n" +
+                " /:::/\\:::\\   \\:::\\    \\  /:::/   |::|   |/\\    \\  /:::/   |::::::::\\    \\ \n" +
+                "/:::/  \\:::\\   \\:::\\____\\/:: /    |::|   /::\\____\\/:::/    |:::::::::\\____\\\n" +
+                "\\::/    \\:::\\  /:::/    /\\::/    /|::|  /:::/    /\\::/    / ~~~~~/:::/    /\n" +
+                " \\/____/ \\:::\\/:::/    /  \\/____/ |::| /:::/    /  \\/____/      /:::/    / \n" +
+                "          \\::::::/    /           |::|/:::/    /               /:::/    /  \n" +
+                "           \\::::/    /            |::::::/    /               /:::/    /   \n" +
+                "           /:::/    /             |:::::/    /               /:::/    /    \n" +
+                "          /:::/    /              |::::/    /               /:::/    /     \n" +
+                "         /:::/    /               /:::/    /               /:::/    /      \n" +
+                "        /:::/    /               /:::/    /               /:::/    /       \n" +
+                "        \\::/    /                \\::/    /                \\::/    /        \n" +
+                "         \\/____/                  \\/____/                  \\/____/         "
+                + ANSI_RESET);
+        System.out.println(" ");
+        System.out.println("AZIENDA NAPOLETANA MOBILITA' ");
         ManutenzioneDAO md = new ManutenzioneDAO(em);
         PercorrenzaDAO pd = new PercorrenzaDAO(em);
         TesseraDAO td = new TesseraDAO(em);
