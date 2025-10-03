@@ -281,7 +281,6 @@ public class Application {
         }
     }
 
-    public static void menuUser(UUID utenteId) {
     public static void menuUser(UUID utenteId, TrattaDAO traD, TitoloDiViaggioDAO tdv) {
         System.out.println("Benvenuto, seleziona l'operazione che vuoi eseguire oppure 0 per uscire.");
         int option;
