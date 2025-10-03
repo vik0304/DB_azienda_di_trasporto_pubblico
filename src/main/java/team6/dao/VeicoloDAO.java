@@ -37,11 +37,12 @@ public class VeicoloDAO {
         transaction.commit();
     }
 
-    public void elimina(Scanner scanner, VeicoloDAO vDao){
+    public void elimina(Scanner scanner){
         System.out.println("Inserisci l'ID del veicolo da eliminare");
         try {
             long id = scanner.nextLong();
-            vDao.findAndDelete(id);
+            findAndDelete(id);
+            System.out.println("Veicolo eliminato correttamente");
         } catch (IllegalArgumentException e){
             System.out.println("ID non valido");
         } catch (NotFoundException e){

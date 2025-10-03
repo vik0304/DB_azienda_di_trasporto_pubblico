@@ -28,4 +28,13 @@ public abstract class TitoloDiViaggio {
     public UUID getId() {
         return id;
     }
+
+    @Override
+    public String toString() {
+        return "TitoloDiViaggio{" +
+                "id=" + id +
+                ", dataAcquisto=" + dataAcquisto +
+                ", venditore=" + venditore +
+                '}';
+    }
 }

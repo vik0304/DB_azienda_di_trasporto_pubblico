@@ -100,12 +100,13 @@ public class UtenteDAO {
         }
     }
 
-    public void elimina(Scanner scanner, UtenteDAO uDao){
+    public void elimina(Scanner scanner){
         System.out.println("Inserisci l'ID della utente da eliminare");
         String iDInput = scanner.nextLine();
         try {
             UUID id = UUID.fromString(iDInput);
-            uDao.findAndDelete(id);
+            findAndDelete(id);
+            System.out.println("Utente eliminato correttamente");
         } catch (IllegalArgumentException e){
             System.out.println("ID non valido");
         } catch (NotFoundException e){

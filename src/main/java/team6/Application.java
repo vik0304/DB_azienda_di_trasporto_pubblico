@@ -86,7 +86,7 @@ public class Application {
                         menuAdminCerca(vd, tdv, td, traD, ud, pd, md, venD);
                         break;
                     case 3:
-
+                        menuAdminElimina(vd, tdv, td, traD, ud, pd, md, venD);
                         break;
                     case 4:
                         System.out.println(" Numero Percorrenze ");
@@ -194,7 +194,7 @@ public class Application {
                         isWorking = false;
                         break;
                     case 1:
-
+                        tdv.cerca(s);
                         break;
                     case 2:
                         ud.cercaUtentePerIdDaInput(s);
@@ -206,7 +206,7 @@ public class Application {
                         vd.cercaVeicoloPerIdDaInput(s);
                         break;
                     case 5:
-
+                        md.cerca(s);
                         break;
                     case 6:
 
@@ -216,6 +216,60 @@ public class Application {
                         break;
                     case 8:
 
+                        break;
+                    default:
+                        System.out.println("Opzione non valida.");
+                        break;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Errore: devi inserire un numero intero positivo.");
+            }
+        }
+    }
+
+    public static void menuAdminElimina(VeicoloDAO vd, TitoloDiViaggioDAO tdv, TesseraDAO td, TrattaDAO traD, UtenteDAO ud, PercorrenzaDAO pd, ManutenzioneDAO md, VenditoreDAO venD) {
+        System.out.println(" Seleziona quale elemento vuoi eliminare in base all'id: ");
+        int option;
+        boolean isWorking = true;
+        while (isWorking) {
+            System.out.println("1- Biglietto/Abbonamento");
+            System.out.println("2- Utente");
+            System.out.println("3- Tessera");
+            System.out.println("4- Veicolo");
+            System.out.println("5- Manutenzione");
+            System.out.println("6- Tratta");
+            System.out.println("7- Percorrenza");
+            System.out.println("8- Rivenditore autorizzato / Distributore automatico");
+            System.out.println("0-  Torna indietro");
+            try {
+                option = Integer.parseInt(s.nextLine());
+                switch (option) {
+                    case 0:
+                        isWorking = false;
+                        break;
+                    case 1:
+                        tdv.elimina(s);
+                        break;
+                    case 2:
+                        ud.elimina(s);
+                        break;
+                    case 3:
+                        td.elimina(s);
+                        break;
+                    case 4:
+                        vd.elimina(s);
+                        break;
+                    case 5:
+                        md.elimina(s);
+                        break;
+                    case 6:
+                        traD.elimina(s);
+                        break;
+                    case 7:
+                        pd.elimina(s);
+                        break;
+                    case 8:
+                        venD.elimina(s);
                         break;
                     default:
                         System.out.println("Opzione non valida.");

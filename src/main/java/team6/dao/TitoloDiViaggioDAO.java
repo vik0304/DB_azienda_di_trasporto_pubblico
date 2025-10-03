@@ -41,16 +41,32 @@ public class TitoloDiViaggioDAO {
         transaction.commit();
     }
 
-    public void elimina(Scanner scanner, TitoloDiViaggioDAO titDao){
+    public void cerca(Scanner s){
+        System.out.println("Inserisci l'ID del titolo di viaggio da cercare");
+        String iDInput = s.nextLine();
+        try {
+            UUID id = UUID.fromString(iDInput);
+            TitoloDiViaggio risultato = findById(id);
+            System.out.println("Ecco il titolo di viaggio richiesto:");
+            System.out.println(risultato);
+        } catch (IllegalArgumentException e){
+            System.out.println("ID non valido");
+        } catch (NotFoundException e){
+            System.out.println("Titolo di viaggio non trovato");
+        }
+    }
+
+    public void elimina(Scanner scanner){
         System.out.println("Inserisci l'ID del titolo di viaggio da eliminare");
         String iDInput = scanner.nextLine();
         try {
             UUID id = UUID.fromString(iDInput);
-            titDao.findAndDelete(id);
+            findAndDelete(id);
+            System.out.println("Titolo di viaggio eliminato correttamente.");
         } catch (IllegalArgumentException e){
             System.out.println("ID non valido");
         } catch (NotFoundException e){
-            System.out.println("Titolo di viaggio non trovata");
+            System.out.println("Titolo di viaggio non trovato");
         }
     }
 

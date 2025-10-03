@@ -68,12 +68,13 @@ public class VenditoreDAO {
         }
     }
 
-    public void elimina(Scanner scanner, VenditoreDAO vendDao){
+    public void elimina(Scanner scanner){
         System.out.println("Inserisci l'ID del venditore da eliminare");
         String iDInput = scanner.nextLine();
         try {
             UUID id = UUID.fromString(iDInput);
-            vendDao.findAndDelete(id);
+            findAndDelete(id);
+            System.out.println("Venditore eliminato correttamente");
         } catch (IllegalArgumentException e){
             System.out.println("ID non valido");
         } catch (NotFoundException e){

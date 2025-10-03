@@ -51,12 +51,13 @@ public class TesseraDAO {
         System.out.println("La tessera " + found.getId() + " è stata rimossa");
     }
 
-    public void elimina(Scanner scanner, TesseraDAO tessDao){
+    public void elimina(Scanner scanner){
         System.out.println("Inserisci l'ID della tessera da eliminare");
         String iDInput = scanner.nextLine();
         try {
             UUID id = UUID.fromString(iDInput);
-            tessDao.findAndDelete(id);
+            findAndDelete(id);
+            System.out.println("Tessera eliminata correttamente");
         } catch (IllegalArgumentException e){
             System.out.println("ID non valido");
         } catch (NotFoundException e){

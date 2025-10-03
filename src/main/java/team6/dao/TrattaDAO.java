@@ -38,12 +38,13 @@ public class TrattaDAO {
         transaction.commit();
     }
 
-    public void elimina(Scanner scanner, TrattaDAO tDao){
+    public void elimina(Scanner scanner){
         System.out.println("Inserisci l'ID della tratta da eliminare");
         String iDInput = scanner.nextLine();
         try {
             UUID id = UUID.fromString(iDInput);
-            tDao.findAndDelete(id);
+            findAndDelete(id);
+            System.out.println("Tratta eliminata correttamente");
         } catch (IllegalArgumentException e){
             System.out.println("ID non valido");
         } catch (NotFoundException e){

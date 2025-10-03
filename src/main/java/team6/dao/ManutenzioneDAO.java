@@ -3,6 +3,7 @@ package team6.dao;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import team6.entities.Manutenzione;
+import team6.entities.TitoloDiViaggio;
 import team6.entities.Utente;
 import team6.entities.Veicolo;
 import team6.exeptions.NotFoundException;
@@ -50,12 +51,28 @@ public class ManutenzioneDAO {
         System.out.println("La manutenzione " + found.getId() + " è stata rimossa");
     }
 
-    public void elimina(Scanner scanner, ManutenzioneDAO mDao){
+    public void elimina(Scanner scanner){
         System.out.println("Inserisci l'ID della manutenzione da eliminare");
         String iDInput = scanner.nextLine();
         try {
             UUID id = UUID.fromString(iDInput);
-            mDao.findAndDelete(id);
+            findAndDelete(id);
+            System.out.println("La manutenzione è stata eliminata correttamente");
+        } catch (IllegalArgumentException e){
+            System.out.println("ID non valido");
+        } catch (NotFoundException e){
+            System.out.println("Manutenzione non trovata");
+        }
+    }
+
+    public void cerca(Scanner s){
+        System.out.println("Inserisci l'ID della manutenzione");
+        String iDInput = s.nextLine();
+        try {
+            UUID id = UUID.fromString(iDInput);
+            Manutenzione risultato = findById(id);
+            System.out.println("Ecco la manutenzione richiesta:");
+            System.out.println(risultato);
         } catch (IllegalArgumentException e){
             System.out.println("ID non valido");
         } catch (NotFoundException e){
