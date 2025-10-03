@@ -9,6 +9,7 @@ import java.util.UUID;
 @Entity
 public class Tessera {
     @Id
+    @GeneratedValue
     private UUID id;
     @Column(name = "data_di_emissione")
     private LocalDate dataDiEmissione;

@@ -53,8 +53,8 @@ public class UtenteDAO {
         System.out.println("L'utente " + found.getCodice_fiscale() + " è stato rimosso");
     }
 
-    public String userType(UUID id){
-        TypedQuery<String> query = entityManager.createQuery("SELECT u.tipoUtente FROM Utente u WHERE u.codiceFiscale = :id", String.class);
+    public TipoUtente userType(UUID id){
+        TypedQuery<TipoUtente> query = entityManager.createQuery("SELECT u.tipoUtente FROM Utente u WHERE u.codiceFiscale = :id", TipoUtente.class);
         query.setParameter("id", id);
         return query.getSingleResult();
     }

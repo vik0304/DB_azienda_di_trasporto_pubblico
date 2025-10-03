@@ -54,7 +54,7 @@ public class PercorrenzaDAO {
         }
     }
 
-    public long numPercorrenza(UUID trattaId, UUID veicoloId){
+    public long numPercorrenza(UUID trattaId, long veicoloId){
         TypedQuery<Long> query = entityManager.createQuery(
                 "SELECT COUNT(p) FROM Percorrenza p WHERE p.tratta.id = :trattaId AND p.veicolo.id = :veicoloId", Long.class
         );
@@ -63,7 +63,7 @@ public class PercorrenzaDAO {
         return query.getSingleResult();
     }
 
-    public Long tempoEffettivoTratta(UUID trattaId, UUID veicoloId){
+    public Long tempoEffettivoTratta(UUID trattaId, long veicoloId){
         TypedQuery<Long> query = entityManager.createQuery(
                 "SELECT SUM(p.durataCorsa) FROM Percorrenza p WHERE p.tratta.id = :trattaId AND p.veicolo.id = :veicoloId",
                 Long.class
@@ -100,8 +100,8 @@ public class PercorrenzaDAO {
         System.out.println("Inserisci l'ID (UUID) della tratta:");
         try {
             UUID trattaId = UUID.fromString(scanner.nextLine());
-            System.out.println("Inserisci l'ID (UUID) del veicolo:");
-            UUID veicoloId = UUID.fromString(scanner.nextLine());
+            System.out.println("Inserisci l'ID del veicolo:");
+            long veicoloId = Long.parseLong(scanner.nextLine());
 
             long numPercorrenze = numPercorrenza(trattaId, veicoloId);
             System.out.println("Numero di percorrenze della tratta " + trattaId + " effettuate dal veicolo " + veicoloId + ": " + numPercorrenze);
@@ -116,8 +116,8 @@ public class PercorrenzaDAO {
         System.out.println("Inserisci l'ID (UUID) della tratta:");
         try {
             UUID trattaId = UUID.fromString(scanner.nextLine());
-            System.out.println("Inserisci l'ID (UUID) del veicolo:");
-            UUID veicoloId = UUID.fromString(scanner.nextLine());
+            System.out.println("Inserisci l'ID del veicolo:");
+            long veicoloId = Long.parseLong(scanner.nextLine());
 
             Long tempoTotale = tempoEffettivoTratta(trattaId, veicoloId);
             if (tempoTotale != null) {
@@ -125,8 +125,6 @@ public class PercorrenzaDAO {
             } else {
                 System.out.println("Nessuna percorrenza trovata per questa combinazione tratta-veicolo.");
             }
-        } catch (IllegalArgumentException e) {
-            System.err.println("ID non valido. Assicurati di inserire UUID corretti.");
         } catch (Exception e) {
             System.err.println("Errore durante la ricerca: " + e.getMessage());
         }
