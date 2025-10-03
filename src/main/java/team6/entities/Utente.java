@@ -72,4 +72,15 @@ public class Utente {
     public TipoUtente getTipoUtente() {
         return tipoUtente;
     }
+
+    @Override
+    public String toString() {
+        return "Utente{" +
+                "codiceFiscale=" + codiceFiscale +
+                ", nome='" + nome + '\'' +
+                ", cognome='" + cognome + '\'' +
+                ", dataDiNascita=" + dataDiNascita +
+                ", tipoUtente=" + tipoUtente +
+                '}';
+    }
 }
