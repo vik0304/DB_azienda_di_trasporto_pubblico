@@ -283,4 +283,26 @@ public class TitoloDiViaggioDAO {
             System.err.println("Errore durante la ricerca: " + e.getMessage());
         }
     }
+
+    public void verificaStatoAbbonamento(UUID utenteId) {
+        TypedQuery<Abbonamento> query = entityManager.createQuery(
+            "SELECT a FROM Abbonamento a JOIN a.idTessera t WHERE t.idUtente.id = :utenteId ORDER BY a.dataScadenza DESC",
+            Abbonamento.class
+        );
+        query.setParameter("utenteId", utenteId);
+        List<Abbonamento> abbonamenti = query.getResultList();
+
+        if (abbonamenti.isEmpty()) {
+            System.out.println("Non hai abbonamenti.");
+        } else {
+            LocalDate oggi = LocalDate.now();
+            for (Abbonamento abbonamento : abbonamenti) {
+                if (abbonamento.getDataScadenza().isBefore(oggi)) {
+                    System.out.println("Abbonamento scaduto il: " + abbonamento.getDataScadenza());
+                } else {
+                    System.out.println("Abbonamento valido fino al: " + abbonamento.getDataScadenza());
+                }
+            }
+        }
+    }
 }
