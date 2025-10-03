@@ -9,6 +9,7 @@ import java.util.UUID;
 @Entity
 public class Utente {
     @Id
+    @GeneratedValue
     @Column(name = "codice_fiscale")
     private UUID codiceFiscale;
 
