@@ -48,7 +48,7 @@ public class Application {
                     if (userType.equals("ADMIN")) {
                         menuAdmin(vd, tdv, td, traD, ud, pd, md, venD);
                     } else if (userType.equals("USER")) {
-                        menuUser(utenteId);
+                        menuUser(utenteId, traD, tdv);
                     }
                 } catch (IllegalArgumentException e) {
                     System.out.println("L'id inserito non è valido, verrai riportato all'inizio.");
@@ -282,13 +282,14 @@ public class Application {
     }
 
     public static void menuUser(UUID utenteId) {
+    public static void menuUser(UUID utenteId, TrattaDAO traD, TitoloDiViaggioDAO tdv) {
         System.out.println("Benvenuto, seleziona l'operazione che vuoi eseguire oppure 0 per uscire.");
         int option;
         boolean isWorking = true;
         while (isWorking) {
             System.out.println("1- ");
-            System.out.println("2- ");
-            System.out.println("3- ");
+            System.out.println("2- Verifica stato abbonamento");
+            System.out.println("3- Visualizza lista tratte disponibili");
             System.out.println("4- ");
             System.out.println("5- ");
             System.out.println("6- ");
@@ -305,10 +306,10 @@ public class Application {
 
                         break;
                     case 2:
-
+                        tdv.verificaStatoAbbonamento(utenteId);
                         break;
                     case 3:
-
+                        traD.mostraListaTratte(utenteId);
                         break;
                     case 4:
 

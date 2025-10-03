@@ -63,4 +63,15 @@ public class TrattaDAO {
         save(tratta);
         System.out.println("La tratta è stata correttamente aggiunta");
     }
+
+    public void mostraListaTratte(UUID utenteId) {
+        List<Tratta> tratte = entityManager.createQuery("SELECT t FROM Tratta t", Tratta.class).getResultList();
+        if (tratte.isEmpty()) {
+            System.out.println("Nessuna tratta disponibile.");
+        } else {
+            for (Tratta tratta : tratte) {
+                System.out.println(tratta);
+            }
+        }
+    }
 }
