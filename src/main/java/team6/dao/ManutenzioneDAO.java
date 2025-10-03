@@ -65,7 +65,7 @@ public class ManutenzioneDAO {
         }
     }
 
-    public void cerca(Scanner s){
+    public void cercaPerManutenzione(Scanner s){
         System.out.println("Inserisci l'ID della manutenzione");
         String iDInput = s.nextLine();
         try {

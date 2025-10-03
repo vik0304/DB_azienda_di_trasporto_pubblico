@@ -2,6 +2,7 @@ package team6.dao;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import team6.entities.Manutenzione;
 import team6.entities.Tratta;
 import team6.exeptions.NotFoundException;
 
@@ -28,6 +29,21 @@ public class TrattaDAO {
         Tratta found = entityManager.find(Tratta.class, id);
         if (found == null) throw new NotFoundException(id);
         return found;
+    }
+
+    public void cercaPerTratta(Scanner s){
+        System.out.println("Inserisci l'ID della tratta");
+        String iDInput = s.nextLine();
+        try {
+            UUID id = UUID.fromString(iDInput);
+            Tratta risultato = findById(id);
+            System.out.println("Ecco la tratta richiesta:");
+            System.out.println(risultato);
+        } catch (IllegalArgumentException e){
+            System.out.println("ID non valido");
+        } catch (NotFoundException e){
+            System.out.println("Tratta non trovata");
+        }
     }
 
     public void findAndDelete(UUID id) {
