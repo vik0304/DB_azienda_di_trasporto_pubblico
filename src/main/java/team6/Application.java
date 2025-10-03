@@ -6,6 +6,7 @@ import jakarta.persistence.Persistence;
 import team6.dao.*;
 import team6.entities.*;
 import java.util.*;
+import java.time.LocalDate;
 
 public class Application {
     private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("dbtrasporti");
