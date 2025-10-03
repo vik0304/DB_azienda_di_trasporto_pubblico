@@ -561,10 +561,11 @@ public class Application {
     }
 
     public static void adminCreationMenu(VeicoloDAO vd, TitoloDiViaggioDAO tdv, TesseraDAO td, TrattaDAO traD, UtenteDAO ud, PercorrenzaDAO pd, ManutenzioneDAO md, VenditoreDAO venD){
-        System.out.println("Seleziona l'elemento che vuoi inserire");
         int option;
         boolean isWorking = true;
         while (isWorking) {
+            System.out.println(" ");
+            System.out.println("Seleziona l'elemento che vuoi inserire");
             System.out.println("1- Biglietto/Abbonamento");
             System.out.println("2- Utente");
             System.out.println("3- Tessera");
@@ -615,10 +616,11 @@ public class Application {
     }
 
     public static void menuAdminCerca(VeicoloDAO vd, TitoloDiViaggioDAO tdv, TesseraDAO td, TrattaDAO traD, UtenteDAO ud, PercorrenzaDAO pd, ManutenzioneDAO md, VenditoreDAO venD) {
-        System.out.println(" Seleziona quale elemento vuoi cercare in base all'id: ");
         int option;
         boolean isWorking = true;
         while (isWorking) {
+            System.out.println(" ");
+            System.out.println(" Seleziona quale elemento vuoi cercare in base all'id: ");
             System.out.println("1- Biglietto/Abbonamento");
             System.out.println("2- Utente");
             System.out.println("3- Tessera");
@@ -669,10 +671,11 @@ public class Application {
     }
 
     public static void menuAdminElimina(VeicoloDAO vd, TitoloDiViaggioDAO tdv, TesseraDAO td, TrattaDAO traD, UtenteDAO ud, PercorrenzaDAO pd, ManutenzioneDAO md, VenditoreDAO venD) {
-        System.out.println(" Seleziona quale elemento vuoi eliminare in base all'id: ");
         int option;
         boolean isWorking = true;
         while (isWorking) {
+            System.out.println(" ");
+            System.out.println(" Seleziona quale elemento vuoi eliminare in base all'id: ");
             System.out.println("1- Biglietto/Abbonamento");
             System.out.println("2- Utente");
             System.out.println("3- Tessera");
@@ -723,10 +726,11 @@ public class Application {
     }
 
     public static void menuUser(UUID utenteId, TrattaDAO traD, TitoloDiViaggioDAO tdv) {
-        System.out.println("Benvenuto, seleziona l'operazione che vuoi eseguire oppure 0 per uscire.");
         int option;
         boolean isWorking = true;
         while (isWorking) {
+            System.out.println(" ");
+            System.out.println("Benvenuto, seleziona l'operazione che vuoi eseguire oppure 0 per uscire.");
             System.out.println("1- Verifica stato abbonamento");
             System.out.println("2- Visualizza lista tratte disponibili");
             System.out.println("0- Esci");
