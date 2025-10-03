@@ -206,16 +206,16 @@ public class Application {
                         vd.cercaVeicoloPerIdDaInput(s);
                         break;
                     case 5:
-                        md.cerca(s);
+                        md.cercaPerManutenzione(s);
                         break;
                     case 6:
-
+                        traD.cercaPerTratta(s);
                         break;
                     case 7:
-
+                        pd.cercaPerPercorrenza(s);
                         break;
                     case 8:
-
+                        venD.cercaPerVenditore(s);
                         break;
                     default:
                         System.out.println("Opzione non valida.");
@@ -281,7 +281,6 @@ public class Application {
         }
     }
 
-    public static void menuUser(UUID utenteId) {
     public static void menuUser(UUID utenteId, TrattaDAO traD, TitoloDiViaggioDAO tdv) {
         System.out.println("Benvenuto, seleziona l'operazione che vuoi eseguire oppure 0 per uscire.");
         int option;

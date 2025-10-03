@@ -81,4 +81,19 @@ public class VenditoreDAO {
             System.out.println("Venditore non trovato");
         }
     }
+
+    public void cercaPerVenditore(Scanner s){
+        System.out.println("Inserisci l'ID della venditore");
+        String iDInput = s.nextLine();
+        try {
+            UUID id = UUID.fromString(iDInput);
+            Venditore risultato = findById(id);
+            System.out.println("Ecco la venditore richiesta:");
+            System.out.println(risultato);
+        } catch (IllegalArgumentException e){
+            System.out.println("ID non valido");
+        } catch (NotFoundException e){
+            System.out.println("Venditore non trovata");
+        }
+    }
 }
